@@ -1,0 +1,46 @@
+.instruction, .answer {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+
+}
+
+.lab-window {
+    padding-top: 0px;
+    width: 100%;
+    height: auto;
+    border: #666666 4px solid;
+}
+
+.lab-window-header {
+    background-color: #990033;
+    width: 100%;
+    color: white;
+    position: relative;
+    top: 0;
+}
+.lab-window-header h1 {
+    padding-left: 10px;
+}
+
+.step-window {
+    width: 90%;
+    height: auto;
+    min-height: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    border: #666666 4px solid;
+    margin-bottom: 10px;
+}
+.delete {
+    font-size: 40px;
+    float: right;
+    position: relative;
+    right: 0;
+    top: -40px;
+}
+
+.add-step {
+    text-align: center;
+}
