@@ -35,7 +35,7 @@ $steps = $lab->getSteps();
                     <input type="datetime-local" name="open_date" >
                 </form>
             </div>
-            <?php foreach ($steps as $step) { echo "<div class='step-window'><p>Step ". $step->GetStepMask() . "</p><p>" . $step->GetStepInstruction() ."</p><div class='delete'><a  href='step-delete.php?step=" . $step->GetStepID() .  "'>X</a></div> </div>";} ?>
+            <?php foreach ($steps as $step) { echo "<div class='step-window'><p><a href='edit-step.php?step='" . $step->GetStepID() ." >Step ". $step->GetStepMask() . "</p><p>" . $step->GetStepInstruction() ."</p><div class='delete'><a  href='step-delete.php?step=" . $step->GetStepID() .  "'>X</a></div> </div>";} ?>
             <div class="step-window add-step">
                 <a href="add-step.php">Add Step</a>
             </div>

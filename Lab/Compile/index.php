@@ -29,11 +29,11 @@ else
     <link rel="stylesheet" type="text/css" href="../style.css">
     <!-- Create a Code Mirror instance -->
 
-    <link rel="stylesheet" href="codemirror/lib/codemirror.css">
-    <link rel=stylesheet" href="codemirror/theme/colorforth.css">
-    <script src="codemirror/lib/codemirror.js"></script>
-    <link rel="stylesheet" href="codemirror/addon/hint/show-hint.css">
-    <script src="codemirror/mode/clike/clike.js"></script>
+    <link rel="stylesheet" href="../Include/codemirror/lib/codemirror.css">
+    <link rel=stylesheet" href="../Include/codemirror/theme/colorforth.css">
+    <script src="../Include/codemirror/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="../Include/codemirror/addon/hint/show-hint.css">
+    <script src="../Include/codemirror/mode/clike/clike.js"></script>
 
 </header>
 <body>
