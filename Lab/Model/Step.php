@@ -66,9 +66,19 @@ class Step
         return $this->step_id;
     }
 
-    public function GetStepInstruction()
+    public function GetInstructions()
     {
         return $this->instruction;
+    }
+
+    public function GetCorrectAnswer()
+    {
+        return $this->correct_answer;
+    }
+
+    public function GetExpectedOutput()
+    {
+        return $this->expected_output;
     }
 }
 

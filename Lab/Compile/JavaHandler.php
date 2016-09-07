@@ -36,16 +36,16 @@ class JavaHandler
         $this->input = $input;
         $this->filename = $this->FindFileName();
 
-        $JAVA_HOME = "/htdocs/JavaHandler/Compile/jdk1.8.0_102";
+        $JAVA_HOME = "/htdocs/CSE110/Lab/Compile/jdk1.8.0_102";
         $PATH = "$JAVA_HOME/bin:".getenv('PATH');
         putenv("JAVA_HOME=$JAVA_HOME");
         putenv("PATH=$PATH");
 
-        $myfile = fopen("$this->filename.java", "w") or die("Unable to open file!");
-        fwrite($myfile, $input);
+        $myfile = fopen($_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/$this->filename.java", "w") or die("Unable to open file!");
+        fwrite($myfile, $this->input);
         fclose($myfile);
 
-        exec("C:/xampp/htdocs/JavaHandler/Compile/jdk1.8.0_102/bin/javac C:/xampp/htdocs/JavaHandler/Compile/$this->filename.java -d C:/xampp/htdocs/JavaHandler/Compile/ 2>&1", $this->output);
+        exec($_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/jdk1.8.0_102/bin/javac " . $_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/$this->filename.java -d " . $_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/ 2>&1", $this->output);
 
         echo var_dump($this->output);
 
@@ -64,7 +64,7 @@ class JavaHandler
 
         if($this->CompileSuccess)
         {
-           exec("C:/xampp/htdocs/JavaHandler/Compile/jdk1.8.0_102/bin/java $this->filename 2>&1", $this->output);
+           exec($_SERVER['DOCUMENT_ROOT'] ."/CSE110/Lab/Compile/jdk1.8.0_102/bin/java -cp " . $_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/ $this->filename 2>&1", $this->output);
         }
         else
         {

@@ -44,3 +44,11 @@
 .add-step {
     text-align: center;
 }
+
+textarea {
+    width: 100%;
+    margin-bottom: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    min-height: 150px;
+}
