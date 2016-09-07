@@ -61,6 +61,11 @@ class Step
         return $this->step_mask;
     }
 
+    public function GetResourceLinkID()
+    {
+        return $this->resource_link_id;
+    }
+
     public function GetStepID()
     {
         return $this->step_id;
@@ -79,6 +84,21 @@ class Step
     public function GetExpectedOutput()
     {
         return $this->expected_output;
+    }
+
+    public function SetInstructions($instructions)
+    {
+        $this->instruction = $instructions;
+    }
+
+    public function SetCorrectAnswer($correct_answer)
+    {
+        $this->correct_answer = $correct_answer;
+    }
+
+    public function SetExpectedOutput($expected_output)
+    {
+        $this->expected_output = $expected_output;
     }
 }
 

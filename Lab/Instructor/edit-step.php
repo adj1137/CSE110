@@ -1,5 +1,6 @@
 <?php
 include_once '../Model/Step.php';
+include_once '../Model/Lab.php';
 include_once '../Compile/JavaHandler.php';
 
 session_start();
@@ -29,6 +30,17 @@ if(isset($_POST['compile'])) //Compile and Run have been set
 elseif(isset($_POST['save']))
 {
 
+    $instruction = $_POST['instructions'];
+
+    $correct_answer = $_POST['correct_answer'];
+
+    $expected_output = $_POST['expected_output'];
+
+    $step->SetInstructions($instruction);
+    $step->SetCorrectAnswer($correct_answer);
+    $step->SetExpectedOutput($expected_output);
+
+    $step->Save();
 }
 else
 {
