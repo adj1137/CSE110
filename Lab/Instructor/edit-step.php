@@ -69,34 +69,26 @@ else
     <script src="../Include/codemirror/mode/clike/clike.js"></script>
 </header>
 <body>
-<h1><?php echo $_SESSION['context_label'] . ": " . $_SESSION['context_title'] . " Lab System" ?></h1>
-<h2>Welcome <?php echo $_SESSION['lis_person_name_given'];  ?>!</h2>
-<hr />
 <div class="lab-window">
     <div class="lab-window-header">
-        <h1 class="lab-title">Step <?php echo $step->GetStepMask() ?> </h1>
+        <h1 class="lab-title"><?php echo $_SESSION['resource_link_title']; ?>: Step <?php echo $step->GetStepMask() ?> </h1>
     </div>
-    <div class="step-window options-window">
-        <form action="edit-step.php?step=<?php echo $_GET['step']; ?>" method="post">
-            <label for="instructions">Instructions</label>
-            <br>
-            <textarea id="instructions" name="instructions" class=""><?php echo $instruction ?></textarea>
-            <br>
-            <label for="correct_answer">Correct Answer</label>
-            <br>
-            <textarea name="correct_answer" id="correct_answer" class=""><?php echo $correct_answer ?></textarea>
-            <input type="submit" value="Compile & Run" name="compile" />
-            <br>
-            <label for="instructions">Expected Output</label>
-            <br>
-            <textarea name="expected_output" id="expected_output" class=""><?php echo $expected_output ?></textarea>
-            <input type="submit" value="Save Step" name="save" />
-        </form>
-    </div>
+    <form action="edit-step.php?step=<?php echo $_GET['step']; ?>" method="post">
+        <label for="instructions">Instructions</label>
+        <br>
+        <textarea id="instructions" name="instructions" class=""><?php echo $instruction ?></textarea>
+        <br>
+        <label for="correct_answer">Correct Answer</label>
+        <br>
+        <textarea name="correct_answer" id="correct_answer" class=""><?php echo $correct_answer ?></textarea>
+        <input type="submit" value="Compile & Run" name="compile" />
+        <br>
+        <label for="instructions">Expected Output</label>
+        <br>
+        <textarea name="expected_output" id="expected_output" class=""><?php echo $expected_output ?></textarea>
+        <input type="submit" value="Save Step" name="save" />
+    </form>
 </div>
-<ul>
-
-</ul>
 </body>
 <script>
     var javaEditor = CodeMirror.fromTextArea(document.getElementById("correct_answer"), {
