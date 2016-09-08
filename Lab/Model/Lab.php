@@ -36,7 +36,7 @@ class Lab
     }
     public function addStep()
     {
-        $step = new Step($this->resource_link_id, 0, $this->step_count + 1);
+        $step = new Step($this->resource_link_id, 0, $this->step_count);
 
         if(strcmp($this->steps, "") == 0)
         {
@@ -60,15 +60,23 @@ class Lab
     public function getSteps()
     {
         $step_numbers = explode(",", $this->steps);
-        echo var_dump($step_numbers);
-        $result = Array();
-        foreach($step_numbers as $id)
-        {
-            $result[count($result)] = new Step($this->resource_link_id, $id, $this->step_count);
-            $this->step_count = $this->step_count + 1;
-        }
 
-        return $result;
+        if(strcmp($step_numbers[0], "") != 0)
+        {
+            $result = Array();
+            foreach($step_numbers as $id)
+            {
+                $this->step_count = $this->step_count + 1;
+                $result[count($result)] = new Step($this->resource_link_id, $id, $this->step_count);
+
+            }
+
+            return $result;
+        }
+        else
+        {
+            return null;
+        }
 
     }
 

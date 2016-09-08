@@ -12,8 +12,6 @@ $lab = new Lab($_SESSION['resource_link_id']);
 
 $steps = $lab->getSteps();
 
-echo $_SERVER['DOCUMENT_ROOT'];
-
 ?>
 <HTML>
     <header>
@@ -38,9 +36,12 @@ echo $_SERVER['DOCUMENT_ROOT'];
                 </form>
             </div>
             <?php
-            foreach ($steps as $step)
+            if(!is_null($steps))
             {
-                echo "<div class='step-window'><p><a href='edit-step.php?step=" . $step->GetStepID() ."'>Step ". $step->GetStepMask() . "</a></p><p>" . $step->GetInstructions() ."</p><div class='delete'><a  href='step-delete.php?step=" . $step->GetStepID() .  "'>X</a></div> </div>";
+                foreach ($steps as $step)
+                {
+                    echo "<div class='step-window'><p><a href='edit-step.php?step=" . $step->GetStepID() ."'>Step ". $step->GetStepMask() . "</a></p><p>" . $step->GetInstructions() ."</p><div class='delete'><a  href='step-delete.php?step=" . $step->GetStepID() .  "'>X</a></div> </div>";
+                }
             }
             ?>
             <div class="step-window add-step">

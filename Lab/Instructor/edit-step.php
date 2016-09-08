@@ -11,7 +11,7 @@ session_start();
  * Time: 3:17 PM
  */
 
-$step = new Step($_GET['step']);
+$step = new Step($_SESSION['resource_link_id'] , $_GET['step']);
 
 $instruction;
 $expected_output;
@@ -41,6 +41,9 @@ elseif(isset($_POST['save']))
     $step->SetExpectedOutput($expected_output);
 
     $step->Save();
+
+    header( 'Location: index.php' ) ;
+    exit();
 }
 else
 {
@@ -50,8 +53,6 @@ else
 
     $expected_output = $step->GetExpectedOutput();
 }
-
-echo var_dump($step);
 
 ?>
 <HTML>
