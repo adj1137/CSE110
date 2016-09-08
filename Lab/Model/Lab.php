@@ -6,6 +6,7 @@
  * Time: 8:12 PM
  */
 include_once "Step.php";
+include_once  "Database.php";
 
 class Lab
 {
@@ -21,7 +22,7 @@ class Lab
         if(is_null($Lab))
         {
             $Lab = NewLab($resource_link_id);
-
+            $this->step_count = 0;
             $this->resource_link_id = $resource_link_id;
 
         }
@@ -31,11 +32,13 @@ class Lab
             $this->due_date = $Lab['due_date'];
             $this->open_date = $Lab['open_date'];
             $this->steps = $Lab['steps'];
+            $this->step_count = 0;
         }
 
     }
     public function addStep()
     {
+        $this->step_count++;
         $step = new Step($this->resource_link_id, 0, $this->step_count);
 
         if(strcmp($this->steps, "") == 0)
@@ -54,7 +57,19 @@ class Lab
 
     public function removeStep($step_id)
     {
+        $this->step_count--;
 
+        $step_numbers = explode(",", $this->steps);
+
+        $index = array_search($step_id,$step_numbers);
+
+        unset($step_numbers[$index]);
+
+        $this->steps = implode(",", $step_numbers);
+
+        echo DeleteStep($step_id);
+
+        $this->save();
     }
 
     public function getSteps()
@@ -66,7 +81,7 @@ class Lab
             $result = Array();
             foreach($step_numbers as $id)
             {
-                $this->step_count = $this->step_count + 1;
+                $this->step_count++;
                 $result[count($result)] = new Step($this->resource_link_id, $id, $this->step_count);
 
             }
@@ -78,6 +93,11 @@ class Lab
             return null;
         }
 
+    }
+
+    public function save()
+    {
+        SaveLab($this->resource_link_id, $this->steps, $this->due_date, $this->open_date);
     }
 
 

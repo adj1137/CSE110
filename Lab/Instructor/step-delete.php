@@ -1,9 +1,9 @@
 <?php
 session_start();
-include_once "../Model/Step.php";
+include_once "../Model/Lab.php";
+
 $step = $_GET['step'];
 
-echo DeleteStep($step);
 
 /**
  * Created by PhpStorm.
@@ -11,3 +11,7 @@ echo DeleteStep($step);
  * Date: 9/1/2016
  * Time: 10:28 PM
  */
+
+$Lab = new Lab($_SESSION['resource_link_id']);
+
+$Lab->removeStep($step);

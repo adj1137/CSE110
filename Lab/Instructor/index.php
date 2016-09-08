@@ -12,6 +12,8 @@ $lab = new Lab($_SESSION['resource_link_id']);
 
 $steps = $lab->getSteps();
 
+//TODO: Implement AJAX to Create "Delete" Buttons on Client Side for Steps
+
 ?>
 <HTML>
     <header>
@@ -33,6 +35,7 @@ $steps = $lab->getSteps();
                     <input type="datetime-local" name="due_date" >
                     <label for="open_date">Open Date</label>
                     <input type="datetime-local" name="open_date" >
+                    <input type="submit" value ="Save">
                 </form>
             </div>
             <?php

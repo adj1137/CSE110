@@ -74,13 +74,13 @@ function DeleteStep($step_id)
     $connection = ConnectDB();
 
     //Create the new step entry with auto increment
-    $sql = "DELETE FROM steps WHERE id=$step_id')";
+    $sql = "DELETE FROM steps WHERE id=$step_id";
     if ($connection->query($sql) == TRUE) {
 
         return TRUE;
 
     } else {
-        return FALSE;
+        return $connection->error;
     }
 }
 

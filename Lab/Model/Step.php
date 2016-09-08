@@ -51,11 +51,6 @@ class Step
         SaveStep($this->instruction, $this->correct_answer, $this->expected_output, $this->step_id, $this->step_mask);
     }
 
-    public function DeleteStep($step_id)
-    {
-        RemoveStep($step_id);
-    }
-
     public function GetStepMask()
     {
         return $this->step_mask;
