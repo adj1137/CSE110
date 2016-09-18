@@ -40,6 +40,8 @@ elseif(isset($_POST['save']))
     $step->SetCorrectAnswer($correct_answer);
     $step->SetExpectedOutput($expected_output);
 
+    var_dump($step);
+
     $step->Save();
 
     header( 'Location: index.php' ) ;

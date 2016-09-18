@@ -151,6 +151,84 @@ function SaveStep($instruction, $correct_answer, $expected_output, $id, $step_ma
     }
 }
 
+function NewError($error, $hint)
+{
+    //Create Database Connection
+    $connection = ConnectDB();
+
+    //Check if 'labs' table exists
+    $query = "SELECT error FROM errors";
+    $result = mysqli_query($connection, $query);
+    //TODO: Evaluate Database Field Sizes - Do we need correct_answer?
+
+    //Create the table if necessary
+    if(empty($result)) {
+        $query = "CREATE TABLE errors (
+                          id int(32) AUTO_INCREMENT,
+                          error varchar(32) NOT NULL,
+                          hint varchar(256) NOT NULL,
+                          PRIMARY KEY  (id)
+                          )";
+        $result = mysqli_query($connection, $query);
+    }
+
+    //Create the new step entry with auto increment
+    $sql = "INSERT INTO errors (error, hint) VALUES ('$error', '$hint')";
+    if ($connection->query($sql) == TRUE) {
+
+        $step_id = mysqli_insert_id($connection);
+
+        return GetLab($error);
+
+    } else {
+        return "Error: " . $sql . "<br>" . $connection->error;
+    }
+}
+
+function GetError($error)
+{
+    $connection = ConnectDB();
+    $sql = "SELECT * FROM errors WHERE error='$error'";
+
+    $result = $connection->query($sql);
+
+    if ($result == TRUE) {
+        return $result->fetch_assoc();
+    }
+    else
+    {
+        return null;
+    }
+}
+
+function GetAllErrors()
+{
+    $connection = ConnectDB();
+    $sql = "SELECT * FROM errors ORDER BY hint";
+
+    $result = $connection->query($sql);
+
+    if ($result == TRUE) {
+        return $result->fetch_all();
+    }
+    else
+    {
+        return null;
+    }    
+}
+
+function SaveError($error, $hint)
+{
+    $connection = ConnectDB();
+    $sql = "UPDATE errors SET error='$error', hint='$hint'";
+
+    if ($connection->query($sql) == TRUE) {
+        return "Record updated successfully";
+    } else {
+        return "Error: " . $sql . "<br>" . $connection->errno . ": " . $connection->error;
+    }
+}
+
 function ConnectDB()
 {
     $servername = "localhost";
@@ -169,6 +247,8 @@ function ConnectDB()
         return $conn;
     }
 }
+
+
 ?>
 
 <?php

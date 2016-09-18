@@ -50,9 +50,7 @@ $steps = $lab->getSteps();
             <div class="step-window add-step">
                 <a href="add-step.php">Add Step</a>
             </div>
+            <a href="error-console.php">Error Console</a>
         </div>
-        <ul>
-
-        </ul>
     </body>
 </HTML>

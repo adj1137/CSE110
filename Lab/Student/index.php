@@ -8,6 +8,7 @@ session_start();
  */
 include_once '../Model/Lab.php';
 include_once '../Compile/JavaHandler.php';
+include_once '../Compile/ErrorDictionary.php';
 
 $lab = new Lab($_SESSION['resource_link_id']);
 
@@ -20,11 +21,15 @@ if(isset($_POST['compile']))
     $code_window = $_POST['code_window'];
 
     $output = $java->GetOutput();
+
+    $error = new ErrorDictionary($output);
+
+    $output = $error->GetErrorOutput();
 }
 elseif(isset($_POST['save']))
 {
     $current_step = $_POST['current_step'];
-
+    $code_window = "";
     $current_step++;
 
     echo count($steps);
@@ -42,6 +47,7 @@ elseif(isset($_POST['save']))
 }
 else
 {
+    $code_window = "";
     $current_step = 0;
     $output = "";
 }
@@ -50,7 +56,7 @@ $step = $steps[$current_step];
 
 $instruction = $step->GetInstructions();
 
-$code_window = $_POST['code_window'];
+
 
 
 
@@ -84,7 +90,7 @@ $code_window = $_POST['code_window'];
                 <br>
                 <label for="output">Output</label>
                 <br>
-                <textarea name="output" id="output" class=""><?php echo $output ?></textarea>
+                <div name="output" id="output" class="output"><?php echo $output ?></div>
                 <input type="hidden" name="current_step" value="<?php echo $current_step ?>" />
                 <input type="submit" value="Continue" name="save" />
             </form>
