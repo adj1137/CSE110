@@ -15,6 +15,7 @@ $_SESSION['resource_link_description'] = $_POST['resource_link_description'];
 $_SESSION['context_title'] = $_POST['context_title'];
 $_SESSION['context_label'] = $_POST['context_label'];
 $_SESSION['lis_person_name_given'] = $_POST['lis_person_name_given'];
+$_SESSION['user_id'] = $_POST['user_id'];
 
 
 //TODO: Add OAuth Authentication to verify connection
