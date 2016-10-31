@@ -48,6 +48,7 @@ class JavaHandler
         if($this->output == Array())
         {
             $this->CompileSuccess = TRUE;
+            $this->output[0] = "Program Compiled Successfully.";
         }
         else
         {
@@ -71,7 +72,6 @@ class JavaHandler
 
     public function GetOutput()
     {
-        echo "<pre>" . $this->output . "</pre>";
         return implode("\n", $this->output);
     }
 
