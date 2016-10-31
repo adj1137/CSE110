@@ -17,6 +17,7 @@ $steps = $lab->getSteps();
 if(isset($_POST['compile']))
 {
     $java = new JavaHandler($_POST['code_window']);
+    $java->Compile();
     $current_step = $_POST['current_step'];
     $code_window = $_POST['code_window'];
 

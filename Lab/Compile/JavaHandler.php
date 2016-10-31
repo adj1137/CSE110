@@ -16,8 +16,7 @@ class JavaHandler
 
     public function JavaHandler($input)
     {
-        $this->Compile($input);
-        $this->Run();
+        $this->input = $input;
 
     }
 
@@ -31,9 +30,8 @@ class JavaHandler
     }
 
 
-    public function Compile($input)
+    public function Compile()
     {
-        $this->input = $input;
         $this->filename = $this->FindFileName();
 
         $JAVA_HOME = "/htdocs/CSE110/Lab/Compile/jdk1.8.0_102";
@@ -46,8 +44,6 @@ class JavaHandler
         fclose($myfile);
 
         exec($_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/jdk1.8.0_102/bin/javac " . $_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/$this->filename.java -d " . $_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/ 2>&1", $this->output);
-
-        echo var_dump($this->output);
 
         if($this->output == Array())
         {
@@ -75,6 +71,7 @@ class JavaHandler
 
     public function GetOutput()
     {
+        echo "<pre>" . $this->output . "</pre>";
         return implode("\n", $this->output);
     }
 
