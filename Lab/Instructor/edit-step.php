@@ -21,11 +21,15 @@ if(isset($_POST['compile'])) //Compile and Run have been set
 {
     $java = new JavaHandler($_POST['correct_answer']);
 
+    $java->Compile();
+    $java->Run();
+
     $expected_output = $java->GetOutput();
 
     $instruction = $_POST['instructions'];
 
     $correct_answer = $_POST['correct_answer'];
+
 }
 elseif(isset($_POST['save']))
 {
