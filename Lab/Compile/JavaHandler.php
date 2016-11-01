@@ -22,11 +22,26 @@ class JavaHandler
 
     private function FindFileName()
     {
-        $clean = str_replace("\r", " ", $this->input);
+        //$clean = str_replace("\r", " ", $this->input);
+
+        $clean = preg_replace('/\s+/S', " ", $this->input);
 
         $input = explode(" ", $clean);
-
-        return $input[2];
+        $i = 0;
+        echo "<pre>" . var_dump($input). "</pre>";
+        while($i < count($input))
+        {
+            if(strcmp($input[$i], "public") == 0)
+            {
+                $i++;
+                if(strcmp($input[$i], "class") == 0)
+                {
+                    $i++;
+                    return $input[$i];
+                }
+            }
+            $i++;
+        }
     }
 
 

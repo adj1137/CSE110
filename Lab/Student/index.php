@@ -30,20 +30,21 @@ if(isset($_POST['compile']))
 elseif(isset($_POST['save']))
 {
     $current_step = $_POST['current_step'];
-    $code_window = "";
-    $current_step++;
+    $output = "";
 
-    echo count($steps);
-    echo $current_step;
-
-    if($current_step < count($steps))
+    if($current_step < $lab->getNumberSteps())
     {
-        $output = "";
+        $code_window = $_POST['code_window'];
+        $current_step++;
     }
-    else
+    elseif($current_step == $lab->getNumberSteps())
     {
         header( 'Location: exit.php' ) ;
         exit();
+    }
+    else
+    {
+        echo "<h1>There was an error.</h1>";
     }
 }
 else

@@ -95,6 +95,13 @@ class Lab
 
     }
 
+    public function getNumberSteps()
+    {
+        $counter = explode(",", $this->steps);
+
+        return count($counter);
+    }
+
     public function save()
     {
         SaveLab($this->resource_link_id, $this->steps, $this->due_date, $this->open_date);
