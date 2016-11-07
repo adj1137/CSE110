@@ -106,7 +106,8 @@ $steps = $lab->getSteps();
         }
     }
     if(isset($_FILES['inputFile'])){
-        //Example: script to grab for first file of input files array
+        //Example: script to grab for first file of input files array; can be used for outputFile array
+        //
         //$file_name = $_FILES['inputFile']['name'][0];
         //$file_size =$_FILES['inputFile']['size'][0];
         //$file_type=$_FILES['inputFile']['type'][0];
