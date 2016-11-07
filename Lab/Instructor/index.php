@@ -97,6 +97,7 @@ $steps = $lab->getSteps();
                 </tr>
             </table>
             <input type="submit" value ="Save Lab" style="margin-top: 0.8rem">
+            <input type="reset" value ="Reset" style="margin-top: 0.8rem">
         </form>
     </div>
     <?php
