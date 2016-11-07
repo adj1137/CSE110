@@ -10,6 +10,12 @@ include_once '../Model/Lab.php';
 include_once '../Compile/JavaHandler.php';
 include_once '../Compile/ErrorDictionary.php';
 
+
+//TODO: Timer: Get current time (start time) and save to DB, Retrieve alotted time from instructor
+// check if (current time > alottedTime + startTime) *need to call time() for current time again
+//      then close lab echo message
+
+
 $lab = new Lab($_SESSION['resource_link_id']);
 
 $steps = $lab->getSteps();

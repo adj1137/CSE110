@@ -33,10 +33,12 @@ $steps = $lab->getSteps();
     <div class="step-window options-window">
         <p>Lab Settings</p>
         <form action="save-lab.php" method="post" enctype="multipart/form-data">
-            <label for="open_date">Open Date</label>
+            <label for="open_date">Open Date:</label>
             <input type="datetime-local" name="open_date" >
-            <label for="due_date">Due Date</label>
+            <label for="due_date">Due Date:</label>
             <input type="datetime-local" name="due_date" >
+            <label for="alotted_time">Time Allowed:</label>
+            <input type="time" name="alotted_time" >
             <table style="margin-top: 0.8rem">
                 <tr>
                     <th><!-- to be left blank as placeholder --></th>
