@@ -95,5 +95,10 @@ class Step
     {
         $this->expected_output = $expected_output;
     }
+
+    public function setStepMask($x)
+    {
+        $this->step_mask = $x;
+    }
 }
 
