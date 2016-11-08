@@ -14,11 +14,17 @@ class JavaHandler
     private $output;
     private $CompileSuccess;
     private $resource_link_id;
+    private $user_id;
 
     public function JavaHandler($input)
     {
         $this->input = $input;
 
+    }
+
+    public function setUserID($user_id)
+    {
+        $this->user_id = $user_id;
     }
 
     public function setResourceLinkID($resource_link_id)
@@ -57,10 +63,10 @@ class JavaHandler
         putenv("JAVA_HOME=$JAVA_HOME");
         putenv("PATH=$PATH");
 
-        $path = $_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/" . $this->resource_link_id . "/";
+        $path = $_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/" . $this->resource_link_id . "/" . $this->user_id . "/";
 
         if (!file_exists($path)) {
-            mkdir($path, 0777);
+            mkdir($path, 0777, true);
         }
         else
         {
@@ -71,7 +77,7 @@ class JavaHandler
         fwrite($myfile, $this->input);
         fclose($myfile);
 
-        exec($_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/jdk1.8.0_102/bin/javac " . $_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/" . $this->resource_link_id . "/$this->filename.java -d " . $_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/" . $this->resource_link_id . "/ 2>&1", $this->output);
+        exec($_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/jdk1.8.0_102/bin/javac " . $_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/" . $this->resource_link_id . "/" . $this->user_id . "/$this->filename.java -d " . $_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/" . $this->resource_link_id . "/$this->user_id/ 2>&1", $this->output);
 
         if($this->output == Array())
         {
@@ -89,7 +95,7 @@ class JavaHandler
 
         if($this->CompileSuccess)
         {
-           exec($_SERVER['DOCUMENT_ROOT'] ."/CSE110/Lab/Compile/jdk1.8.0_102/bin/java -cp " . $_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/". $this->resource_link_id ."/ $this->filename < $input_file 2>&1", $this->output);
+           exec($_SERVER['DOCUMENT_ROOT'] ."/CSE110/Lab/Compile/jdk1.8.0_102/bin/java -cp " . $_SERVER['DOCUMENT_ROOT'] . "/CSE110/Lab/Compile/". $this->resource_link_id ."/" . $this->user_id . "/ " .$this->filename ." < $input_file 2>&1", $this->output);
         }
         else
         {
