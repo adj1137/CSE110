@@ -103,9 +103,14 @@ $steps = $lab->getSteps();
     <?php
     if(!is_null($steps))
     {
+        $n = 1;
         foreach ($steps as $step)
         {
-            echo "<div class='step-window'><p><a href='edit-step.php?step=" . $step->GetStepID() ."'>Step ". $step->GetStepMask() . "</a></p><p>" . $step->GetInstructions() ."</p><div class='delete'><a  href='step-delete.php?step=" . $step->GetStepID() .  "'>X</a></div> </div>";
+            $step->setStepMask($n);
+            echo $step->getStepMask();
+            $step->Save();
+            echo "<div class='step-window'><p><a href='edit-step.php?step=" . $step->GetStepID() ."'>Step ". $step->getStepMask() . "</a></p><p>" . $step->GetInstructions() ."</p><div class='delete'><a  href='step-delete.php?step=" . $step->GetStepID() .  "'>X</a></div> </div>";
+            $n = $n + 1;
         }
     }
     if(isset($_FILES['inputFile'])){
