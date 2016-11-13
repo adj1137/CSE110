@@ -16,6 +16,29 @@ class Lab
     private $steps;
     private $step_count;
 
+    //Begin test case handling
+    private $input_one;
+    private $input_two;
+    private $input_three;
+    private $input_four;
+    private $input_five;
+    private $input_six;
+    private $input_seven;
+    private $input_eight;
+    private $input_nine;
+    private $input_ten;
+
+    private $output_one;
+    private $output_two;
+    private $output_three;
+    private $output_four;
+    private $output_five;
+    private $output_six;
+    private $output_seven;
+    private $output_eight;
+    private $output_nine;
+    private $output_ten;
+
     public function Lab($resource_link_id)
     {
         $Lab = GetLab($resource_link_id);
@@ -36,6 +59,7 @@ class Lab
         }
 
     }
+
     public function addStep()
     {
         $this->step_count++;

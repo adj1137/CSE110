@@ -17,6 +17,7 @@ class ErrorDictionary
     public function ErrorDictionary($output)
     {
         $this->output = $output;
+        $this->errors = 0;
 
         $array = explode("\n", $output);
 
@@ -32,14 +33,10 @@ class ErrorDictionary
 
             if($offset !== false)
             {
-
+                $this->errors++;
                 $final = substr($array[$i], $offset + 7, 25);
 
                 $error = new JavaError($final);
-
-                echo "<pre>";
-                echo var_dump($error);
-                echo "</pre>";
 
                 if(strcmp($error->getHint(), "") == 0)
                 {
@@ -62,6 +59,18 @@ class ErrorDictionary
     public function GetErrorOutput()
     {
         return $this->error_output;
+    }
+
+    public function isError()
+    {
+        if($this->errors > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }

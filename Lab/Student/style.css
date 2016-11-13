@@ -1,3 +1,68 @@
+html body {
+    width: 100%;
+    height: 100%;
+}
+.main {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.header {
+    width: 100%;
+    height: 20%;
+    border: black 2px solid;
+}
+.instructions {
+    width: 79%;
+    height: 100%;
+    float: left;
+    border-right: black 2px solid;
+
+}
+.info {
+    width: 20%;
+    height: 100%;
+    float: left;
+    background-color: #a4001d;
+}
+
+.coding-window {
+    height: 40%;
+    width: 100%;
+    border-left: black 2px solid;
+    border-right: black 2px solid;
+    border-bottom: black 2px solid;
+}
+.code_window {
+    height: 100%;
+}
+.navigation {
+    height: 10%;
+    width: 100%;
+    background-color: #a4001d;
+    border-right: black 2px solid;
+    border-left: black 2px solid;
+    border-bottom: black 2px solid;
+}
+.footer {
+    height: 28%;
+    width: 100%;
+    border-right: black 2px solid;
+    border-left: black 2px solid;
+    border-bottom: black 2px solid;
+}
+.output-area {
+    height: 100%;
+    width: 49%;
+    float: left;
+    border-right: black 2px solid;
+}
+.output-help {
+    height: 100%;
+    width: 49%;
+    float: left;
+}
+
 .instruction, .answer {
     width: 90%;
     margin-left: auto;
@@ -53,7 +118,7 @@ textarea {
     margin-right: auto;
     margin-left: auto;
     min-height: 100px;
-    height: 150px;
+    height: 100%;
 }
 .output {
     -moz-appearance: textfield;
@@ -73,7 +138,8 @@ textarea {
 }
 
 #instructions {
-    height: 100px;
+    height: 100%;
+    resize: none;
 }
 
 .lab-title {

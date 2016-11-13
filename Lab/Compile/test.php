@@ -17,6 +17,9 @@ $code = "import java.util.*;
         }";
 $java = new JavaHandler($code);
 
+$java->setResourceLinkID("142");
+$java->setUserID("123456");
+
 $java->Compile();
 
 $java->Run("input1.txt");
