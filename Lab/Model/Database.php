@@ -248,6 +248,50 @@ function ConnectDB()
     }
 }
 
+function StartTimer($resource_link_id, $user_id)
+{
+    //Create Database Connection
+    $connection = ConnectDB();
+
+    if(empty($result)) {
+        $query = "CREATE TABLE timers (
+                          timer_id int(32) AUTO_INCREMENT,
+                          user_id varchar(32) NOT NULL,
+                          resource_link_id varchar(32) NOT NULL,
+                          time datetime NOT NULL,
+                          PRIMARY KEY  (timer_id)
+                          )";
+        $result = mysqli_query($connection, $query);
+    }
+
+    //Create the new timer entry with auto increment and Current Time
+    $sql = "INSERT INTO timers (resource_link_id, user_id, time) VALUES ('$resource_link_id', '$user_id', CURRENT_TIMESTAMP )";
+    if ($connection->query($sql) == TRUE) {
+
+        $step_id = mysqli_insert_id($connection);
+
+        return GetStep($step_id);
+
+    } else {
+        return "Error: " . $sql . "<br>" . $connection->error;
+    }
+}
+
+function CheckTimer($resource_link_id, $user_id)
+{
+    $connection = ConnectDB();
+    $sql = "SELECT time FROM timers WHERE resource_link_id='$resource_link_id' AND user_id='$user_id'";
+
+    $result = $connection->query($sql);
+
+    if ($result == TRUE) {
+        return $result->fetch_row();
+    }
+    else
+    {
+        return null;
+    }
+}
 
 ?>
 
