@@ -12,10 +12,6 @@ include_once '../Compile/ErrorDictionary.php';
 include_once '../Model/Database.php';
 
 
-//TODO: Timer: Get current time (start time) and save to DB, Retrieve alotted time from instructor
-// check if (current time > alottedTime + startTime) *need to call time() for current time again
-//      then close lab echo message
-
 
 $lab = new Lab($_SESSION['resource_link_id']);
 
@@ -85,7 +81,7 @@ else {
 ?>
 <HTML>
     <header>
-        <title>Instructor View</title>
+        <title>Student View</title>
 
         <link rel="stylesheet" type="text/css" href="../Style/css/bootstrap.css' ?>">
         <link rel="stylesheet" type="text/css" href="style.css">
@@ -100,7 +96,7 @@ else {
             <form action="" method="post">
             <div class="header">
                 <div class="instructions">
-                    <textarea id="instructions" name="instructions" class=""><?php echo $instruction ?></textarea>
+                    <textarea readonly id="instructions" name="instructions" class=""><?php echo $instruction ?></textarea>
                 </div>
                 <div class="info">
                     <h1><?php echo $_SESSION['resource_link_title']; ?></h1>
