@@ -1,4 +1,8 @@
 <?php session_start();
+
+include_once '../Include/functions.php';
+include_once '../Model/Step.php';
+
 /**
  * Created by PhpStorm.
  * User: Allen James
@@ -14,7 +18,9 @@ include_once '../Model/Lab.php';
 
 $lab = new Lab($_SESSION['resource_link_id']);
 
-echo var_dump($lab->addStep());
+$step = $lab->addStep();
 
-header( 'Location: labview.php' ) ;
-exit();
+$id = $step->getStepID();
+
+Redirect('../Instructor/edit-step.php?step=' . $id);
+
