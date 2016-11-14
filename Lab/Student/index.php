@@ -9,6 +9,7 @@ session_start();
 include_once '../Model/Lab.php';
 include_once '../Compile/JavaHandler.php';
 include_once '../Compile/ErrorDictionary.php';
+include_once '../Model/Database.php';
 
 
 //TODO: Timer: Get current time (start time) and save to DB, Retrieve alotted time from instructor
@@ -29,6 +30,11 @@ if(isset($_POST['save']))
     $java->Compile();
     $current_step = $_POST['current_step'];
     $code_window = $_POST['code_window'];
+
+    $current_time = $date = date('Y-m-d H:i:s');
+    $start_time = DateTime::createFromFormat('Y-m-d H:i:s', checkTimer($_SESSION['resource_link_id'], $_SESSION['user_id'])[0]);
+
+    $interval = date_diff($start_time, $current_time);
 
     $output = $java->GetOutput();
 
@@ -57,17 +63,19 @@ if(isset($_POST['save']))
         }
     }
 }
-else
-{
+else {
+    startTimer($_SESSION['resource_link_id'], $_SESSION['user_id']);
+    $current_time = DateTime::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'));
+    $start_time = DateTime::createFromFormat('Y-m-d H:i:s', checkTimer($_SESSION['resource_link_id'], $_SESSION['user_id'])[0]);
+
+    $interval = date_diff($start_time, $current_time);
     $code_window = "";
     $current_step = 0;
     $output = "";
 }
+    $step = $steps[$current_step];
 
-$step = $steps[$current_step];
-
-$instruction = $step->GetInstructions();
-
+    $instruction = $step->GetInstructions();
 
 
 
@@ -96,7 +104,7 @@ $instruction = $step->GetInstructions();
                 </div>
                 <div class="info">
                     <h1><?php echo $_SESSION['resource_link_title']; ?></h1>
-                    <h1 id="timer">XX:XX:XX</h1>
+                    <h1 id="timer"><?php echo $interval->format('%h:%i:%s'); ?></h1>
                     <input type="hidden" name="current_step" value="<?php echo $current_step ?>">
                 </div>
             </div>

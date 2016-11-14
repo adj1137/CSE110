@@ -253,27 +253,42 @@ function StartTimer($resource_link_id, $user_id)
     //Create Database Connection
     $connection = ConnectDB();
 
+    //Check if 'labs' table exists
+    $query = "SELECT timer_id FROM timers";
+    $result = mysqli_query($connection, $query);
+    //TODO: Evaluate Database Field Sizes - Do we need correct_answer?
+
     if(empty($result)) {
         $query = "CREATE TABLE timers (
                           timer_id int(32) AUTO_INCREMENT,
-                          user_id varchar(32) NOT NULL,
-                          resource_link_id varchar(32) NOT NULL,
+                          user_id varchar(32) NOT NULL UNIQUE,
+                          resource_link_id varchar(32) NOT NULL UNIQUE,
                           time datetime NOT NULL,
                           PRIMARY KEY  (timer_id)
                           )";
         $result = mysqli_query($connection, $query);
     }
+    $sql = "SELECT * from timers WHERE resource_link_id = $resource_link_id AND user_id = $user_id";
+    $result = $connection->query($sql);
+    echo $result;
+    if($result == TRUE)
+    {
 
-    //Create the new timer entry with auto increment and Current Time
-    $sql = "INSERT INTO timers (resource_link_id, user_id, time) VALUES ('$resource_link_id', '$user_id', CURRENT_TIMESTAMP )";
-    if ($connection->query($sql) == TRUE) {
+    }
+    else
+    {
 
-        $step_id = mysqli_insert_id($connection);
+        //Create the new timer entry with auto increment and Current Time
+        $sql = "INSERT INTO timers (resource_link_id, user_id, time) VALUES ('$resource_link_id', '$user_id', CURRENT_TIMESTAMP )";
+        if ($connection->query($sql) == TRUE) {
 
-        return GetStep($step_id);
+            $step_id = mysqli_insert_id($connection);
 
-    } else {
-        return "Error: " . $sql . "<br>" . $connection->error;
+            return GetStep($step_id);
+
+        } else {
+            return "Error: " . $sql . "<br>" . $connection->error;
+        }
     }
 }
 

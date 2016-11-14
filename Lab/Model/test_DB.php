@@ -8,3 +8,5 @@
 include_once 'Database.php';
 
 startTimer("123456", "1234");
+
+echo CheckTimer("123456", "1234")[0];
