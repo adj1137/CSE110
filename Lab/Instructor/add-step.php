@@ -22,5 +22,7 @@ $step = $lab->addStep();
 
 $id = $step->getStepID();
 
+$step->Save();
+
 Redirect('../Instructor/edit-step.php?step=' . $id);
 

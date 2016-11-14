@@ -16,5 +16,5 @@ $Lab = new Lab($_SESSION['resource_link_id']);
 
 $Lab->removeStep($step);
 
-header( 'Location: labview.php' ) ;
+header( 'Location: index.php' ) ;
 exit();
