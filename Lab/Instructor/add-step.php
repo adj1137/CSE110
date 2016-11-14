@@ -16,5 +16,5 @@ $lab = new Lab($_SESSION['resource_link_id']);
 
 echo var_dump($lab->addStep());
 
-header( 'Location: index.php' ) ;
+header( 'Location: labview.php' ) ;
 exit();

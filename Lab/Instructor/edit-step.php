@@ -48,7 +48,7 @@ elseif(isset($_POST['save']))
 
     $step->Save();
 
-    header( 'Location: index.php' ) ;
+    header( 'Location: labview.php' ) ;
     exit();
 }
 else
