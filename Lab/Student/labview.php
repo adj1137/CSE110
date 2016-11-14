@@ -7,6 +7,7 @@ session_start();
  * Time: 7:14 PM
  */
 include_once '../Model/Lab.php';
+include_once '../Model/Step.php';
 include_once '../Compile/JavaHandler.php';
 include_once '../Compile/ErrorDictionary.php';
 include_once '../Model/Database.php';

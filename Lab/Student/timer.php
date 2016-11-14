@@ -9,9 +9,28 @@ session_start();
 include_once '../Include/functions.php';
 include "../Model/Database.php";
 
-if(CheckTimer($_SESSION['resource_link_id'], $_SESSION['user_id']))
+$timer = DateTime::createFromFormat("Y-m-d H:i:s",CheckTimer($_SESSION['resource_link_id'], $_SESSION['user_id'])[0]);
+echo var_dump($timer);
+if($timer)
 {
-    Redirect('../Student/labview.php');
+    $lab = new Lab($_SESSION['resource_link_id']);
+
+    $interval = new DateInterval();
+    $interval->m =  $lab->getTimerVal();
+
+    $current_time = DateTime::createFromFormat("Y-m-d H:i:s", date('Y-m-d H:i:s'));
+
+    $timer_end = $timer->add($interval);
+
+    if($current_time->diff($timer_end) > 0)
+    {
+        Redirect('../Student/time-up.php');
+    }
+    else
+    {
+        Redirect('../Student/labview.php');
+    }
+    echo var_dump($current_time);
 }
 else
 {
