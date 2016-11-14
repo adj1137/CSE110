@@ -15,29 +15,8 @@ class Lab
     private $open_date;
     private $steps;
     private $step_count;
+    private $timer_val;
 
-    //Begin test case handling
-    private $input_one;
-    private $input_two;
-    private $input_three;
-    private $input_four;
-    private $input_five;
-    private $input_six;
-    private $input_seven;
-    private $input_eight;
-    private $input_nine;
-    private $input_ten;
-
-    private $output_one;
-    private $output_two;
-    private $output_three;
-    private $output_four;
-    private $output_five;
-    private $output_six;
-    private $output_seven;
-    private $output_eight;
-    private $output_nine;
-    private $output_ten;
 
     public function Lab($resource_link_id)
     {
@@ -56,6 +35,7 @@ class Lab
             $this->open_date = $Lab['open_date'];
             $this->steps = $Lab['steps'];
             $this->step_count = 0;
+            $this->timer_val = $Lab['timer_val'];
         }
 
     }
@@ -128,7 +108,17 @@ class Lab
 
     public function save()
     {
-        SaveLab($this->resource_link_id, $this->steps, $this->due_date, $this->open_date);
+        SaveLab($this->resource_link_id, $this->steps, $this->due_date, $this->open_date, $this->timer_val);
+    }
+
+    public function setTimerVal($timer_val)
+    {
+        $this->timer_val = $timer_val;
+    }
+
+    public function getTimerVal()
+    {
+        return $this->timer_val;
     }
 
 

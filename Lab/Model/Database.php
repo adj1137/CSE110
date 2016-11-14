@@ -22,6 +22,7 @@ function NewLab($resource_link_id)
                           steps varchar(512) NOT NULL,
                           due_date DATETIME NOT NULL,
                           open_date DATETIME NOT NULL,
+                          timer_val INT NOT NULL, 
                           PRIMARY KEY  (resource_link_id)
                           )";
         $result = mysqli_query($connection, $query);
@@ -56,10 +57,10 @@ function GetLab($resource_link_id)
     }
 }
 
-function SaveLab($resource_link_id, $steps, $due_date, $open_date)
+function SaveLab($resource_link_id, $steps, $due_date, $open_date, $timer_val)
 {
     $connection = ConnectDB();
-    $sql = "UPDATE labs SET steps='$steps', due_date='$due_date', open_date='$open_date' WHERE resource_link_id='$resource_link_id'";
+    $sql = "UPDATE labs SET steps='$steps', due_date='$due_date', open_date='$open_date' WHERE resource_link_id='$resource_link_id', timer_val='$timer_val'";
 
     if ($connection->query($sql) == TRUE) {
         return "Record updated successfully";
