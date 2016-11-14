@@ -14,50 +14,24 @@ session_start();
 $step = new Step($_SESSION['resource_link_id'] , $_GET['step']);
 
 $instruction;
-$expected_output;
-$correct_answer;
 
-if(isset($_POST['compile'])) //Compile and Run have been set
-{
-    $java = new JavaHandler($_POST['correct_answer']);
 
-    $java->Compile();
-    $java->Run();
-
-    $expected_output = $java->GetOutput();
-
-    $instruction = $_POST['instructions'];
-
-    $correct_answer = $_POST['correct_answer'];
-
-}
-elseif(isset($_POST['save']))
+if(isset($_POST['save']))
 {
 
     $instruction = $_POST['instructions'];
-
-    $correct_answer = $_POST['correct_answer'];
-
-    $expected_output = $_POST['expected_output'];
 
     $step->SetInstructions($instruction);
-    $step->SetCorrectAnswer($correct_answer);
-    $step->SetExpectedOutput($expected_output);
-
     var_dump($step);
 
     $step->Save();
 
-    header( 'Location: labview.php' ) ;
+    header( 'Location: index.php' ) ;
     exit();
 }
 else
 {
     $instruction = $step->GetInstructions();
-
-    $correct_answer = $step->GetCorrectAnswer();
-
-    $expected_output = $step->GetExpectedOutput();
 }
 
 ?>
@@ -84,14 +58,6 @@ else
         <br>
         <textarea id="instructions" name="instructions" class=""><?php echo $instruction ?></textarea>
         <br>
-        <label for="correct_answer">Correct Answer</label>
-        <br>
-        <textarea name="correct_answer" id="correct_answer" class=""><?php echo $correct_answer ?></textarea>
-        <input type="submit" value="Compile & Run" name="compile" />
-        <br>
-        <label for="instructions">Expected Output</label>
-        <br>
-        <textarea name="expected_output" id="expected_output" class=""><?php echo $expected_output ?></textarea>
         <input type="submit" value="Save Step" name="save" />
     </form>
 </div>
@@ -105,4 +71,5 @@ else
     });
 </script>
 </HTML>
+
 
