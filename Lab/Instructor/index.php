@@ -107,7 +107,7 @@ $steps = $lab->getSteps();
         foreach ($steps as $step)
         {
             $step->setStepMask($n);
-            echo $step->getStepMask();
+            //echo $step->getStepMask();
             $step->Save();
             echo "<div class='step-window'><p><a href='edit-step.php?step=" . $step->GetStepID() ."'>Step ". $step->getStepMask() . "</a></p><p>" . $step->GetInstructions() ."</p><div class='delete'><a  href='step-delete.php?step=" . $step->GetStepID() .  "'>X</a></div> </div>";
             $n = $n + 1;
