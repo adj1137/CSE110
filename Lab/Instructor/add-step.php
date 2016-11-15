@@ -22,7 +22,8 @@ $step = $lab->addStep();
 
 $id = $step->getStepID();
 
-$step->Save();
+//This is not the place to do this!!! This causes problems!
+//$step->Save();
 
 Redirect('../Instructor/edit-step.php?step=' . $id);
 
