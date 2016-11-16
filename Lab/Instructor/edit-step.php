@@ -22,12 +22,12 @@ if(isset($_POST['save']))
     $instruction = $_POST['instructions'];
 
     $step->SetInstructions($instruction);
-    var_dump($step);
+    echo var_dump($step);
 
     $step->Save();
 
-    header( 'Location: index.php' ) ;
-    exit();
+    //header( 'Location: index.php' ) ;
+    //exit();
 }
 else
 {

@@ -8,6 +8,7 @@ session_start();
  */
 include_once '../Include/functions.php';
 include "../Model/Database.php";
+include "../Model/Lab.php";
 
 $timer = DateTime::createFromFormat("Y-m-d H:i:s",CheckTimer($_SESSION['resource_link_id'], $_SESSION['user_id'])[0]);
 echo var_dump($timer);

@@ -54,7 +54,7 @@ class Lab
             $this->steps .= ",". $step->GetStepID();
         }
 
-        SaveLab($this->resource_link_id, $this->steps, $this->due_date, $this->open_date);
+        SaveLab($this->resource_link_id, $this->steps, $this->due_date, $this->open_date, $this->timer_val);
 
         return $step;
     }
