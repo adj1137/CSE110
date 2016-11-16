@@ -16,8 +16,7 @@ if($timer)
 {
     $lab = new Lab($_SESSION['resource_link_id']);
 
-    $interval = new DateInterval();
-    $interval->m =  $lab->getTimerVal();
+    $interval = new DateInterval("PT" . $lab->getTimerVal() . "M");
 
     $current_time = DateTime::createFromFormat("Y-m-d H:i:s", date('Y-m-d H:i:s'));
 
