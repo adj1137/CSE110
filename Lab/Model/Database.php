@@ -60,7 +60,7 @@ function GetLab($resource_link_id)
 function SaveLab($resource_link_id, $steps, $due_date, $open_date, $timer_val)
 {
     $connection = ConnectDB();
-    $sql = "UPDATE labs SET steps='$steps', due_date='$due_date', open_date='$open_date' WHERE resource_link_id='$resource_link_id', timer_val='$timer_val'";
+    $sql = "UPDATE labs SET steps='$steps', due_date='$due_date', open_date='$open_date', timer_val='$timer_val' WHERE resource_link_id='$resource_link_id'";
 
     if ($connection->query($sql) == TRUE) {
         return "Record updated successfully";

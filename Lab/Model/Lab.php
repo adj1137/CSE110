@@ -56,6 +56,8 @@ class Lab
 
         SaveLab($this->resource_link_id, $this->steps, $this->due_date, $this->open_date, $this->timer_val);
 
+        echo "<pre>" . var_dump($step) . "</pre>";
+
         return $step;
     }
 

@@ -7,6 +7,5 @@
  */
 include_once 'Database.php';
 
-startTimer("123456", "1234");
-
-echo CheckTimer("123456", "1234")[0];
+$lab = SaveLab("Resource", "1,2", "10-10-1993", "10-10-1993", 120);
+echo $lab;
