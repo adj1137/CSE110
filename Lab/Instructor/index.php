@@ -10,6 +10,10 @@ include_once '../Model/Lab.php';
 
 $lab = new Lab($_SESSION['resource_link_id']);
 
+$start_date = new DateTime($lab->getOpenDate(), new DateTimeZone("America/Phoenix"));
+$due_date = new DateTime($lab->getDueDate(), new DateTimeZone("America/Phoenix"));
+$timer = $lab->getTimerVal();
+
 $steps = $lab->getSteps();
 
 //TODO: Implement AJAX to Create "Delete" Buttons on Client Side for Steps
@@ -33,13 +37,22 @@ $steps = $lab->getSteps();
     <div class="step-window options-window">
         <p>Lab Settings</p>
         <form action="save-lab.php" method="post" enctype="multipart/form-data">
-            <label for="open_date">Open Date:</label>
-            <input type="datetime-local" name="open_date" >
-            <label for="due_date">Due Date:</label>
-            <input type="datetime-local" name="due_date" >
-            <label for="alotted_time">Time Allowed:</label>
-            <input type="time" name="alotted_time" >
             <table style="margin-top: 0.8rem">
+                <tr>
+                    <td></td>
+                    <td><label for="open_date">Open Date:</label></td>
+                    <td><input type="datetime-local" name="open_date" value="<?php echo $start_date->format('Y-m-d\TH:i:s'); ?>"/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label for="due_date">Due Date:</label></td>
+                    <td><input type="datetime-local" name="due_date" value="<?php echo $due_date->format('Y-m-d\TH:i:s'); ?>"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label for="alotted_time">Time Allowed:</label></td>
+                    <td><input type="number" name="alotted_time" value="<?php echo $timer ?>"></td>
+                </tr>
                 <tr>
                     <th><!-- to be left blank as placeholder --></th>
                     <th>Input Test Cases (.txt)</th>
@@ -96,8 +109,7 @@ $steps = $lab->getSteps();
                     <td><input type= "file" name = "outputFile[]"/></td>
                 </tr>
             </table>
-            <input type="submit" value ="Save Lab" style="margin-top: 0.8rem">
-            <input type="reset" value ="Reset" style="margin-top: 0.8rem">
+            <input type="submit" name="save" value ="Save Lab" style="margin-top: 0.8rem">
         </form>
     </div>
     <?php

@@ -14,4 +14,4 @@ echo "<pre>" . var_dump($lab) . "</pre>";
 $id = $step->getStepID();
 //This is not the place to do this!!! This causes problems!
 //$step->Save();
-//Redirect('../Instructor/edit-step.php?step=' . $id);
+Redirect('../Instructor/edit-step.php?step=' . $id);

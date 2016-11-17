@@ -2,6 +2,7 @@
 include_once '../Model/Step.php';
 include_once '../Model/Lab.php';
 include_once '../Compile/JavaHandler.php';
+include_once '../Include/functions.php';
 
 session_start();
 /**
@@ -26,8 +27,7 @@ if(isset($_POST['save']))
 
     $step->Save();
 
-    //header( 'Location: index.php' ) ;
-    //exit();
+    Redirect("index.php");
 }
 else
 {

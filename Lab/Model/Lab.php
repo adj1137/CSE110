@@ -123,6 +123,26 @@ class Lab
         return $this->timer_val;
     }
 
+    public function setOpenDate($open_date)
+    {
+        $this->open_date = $open_date;
+    }
+
+    public function getOpenDate()
+    {
+        return $this->open_date;
+    }
+
+    public function setDueDate($due_date)
+    {
+        $this->due_date = $due_date;
+    }
+
+    public function getDueDate()
+    {
+        return $this->due_date;
+    }
+
 
 
 }
