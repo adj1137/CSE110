@@ -21,6 +21,8 @@ $steps = $lab->getSteps();
 
 $timer = Timer($_SESSION['resource_link_id'], $_SESSION['user_id'], $lab->getTimerVal());
 
+$action = "";
+
 if(!$timer)
 {
    Redirect("time-up.php");
@@ -40,23 +42,13 @@ if(isset($_POST['save']))
     $current_step = $_POST['current_step'];
     $code_window = $_POST['code_window'];
 
-    $current_time = $date = date('Y-m-d H:i:s');
-    $start_time = DateTime::createFromFormat('Y-m-d H:i:s', checkTimer($_SESSION['resource_link_id'], $_SESSION['user_id'])[0]);
-    $start_time->setTimezone(new DateTimeZone("America/Phoenix"));
-
-    $interval = date_diff($start_time, $current_time);
-
     $output = $java->GetOutput();
 
     $error = new ErrorDictionary($output);
 
     $output = $error->GetErrorOutput();
 
-    if($error->isError())
-    {
-
-    }
-    else
+    if(!$error->isError())
     {
         if($current_step < $lab->getNumberSteps())
         {
@@ -78,9 +70,9 @@ else {
     $current_step = 0;
     $output = "";
 }
-    $step = $steps[$current_step];
+$step = $steps[$current_step];
 
-    $instruction = $step->GetInstructions();
+$instruction = $step->GetInstructions();
 
 
 
@@ -101,7 +93,7 @@ else {
     </header>
     <body onload="">
         <div class="main">
-            <form action="" method="post">
+            <form id="form" action="" method="post">
             <div class="header">
                 <div class="instructions">
                     <textarea readonly id="instructions" name="instructions" class=""><?php echo $instruction ?></textarea>
@@ -117,11 +109,11 @@ else {
                 <textarea name="code_window" id="code_window" class=""><?php echo $code_window ?></textarea>
             </div>
             <div class="navigation">
-                <input type="submit" value="Continue" name="save" />
+                <input type="submit" value="Continue" id="save" name="save" />
             </div>
             <div class="footer">
                 <div class="output-area">
-                    <?php echo $output ?></textarea>
+                    <?php echo $output ?>
                 </div>
                 <div class="output-help">
 
@@ -162,11 +154,28 @@ else {
                 time.setMinutes(pieces[1]);
                 time.setSeconds(pieces[2]);
                 var timedif = new Date(time.valueOf() - 1000);
-                var newtime = timedif.toTimeString().split(" ")[0];
-                document.getElementById('timer').innerHTML=newtime;
-                setTimeout(count, 1000);
+                if(timedif.getHours() == 0 && timedif.getMinutes() == 0 && timedif.getSeconds() == 0)
+                {
+                    timeUpFormLaunch("time-up.php");
+                   //window.location ="time-up.php";
+                }
+                else
+                {
+                    var newtime = timedif.toTimeString().split(" ")[0];
+                    document.getElementById('timer').innerHTML=newtime;
+                    setTimeout(count, 1000);
+                }
+
             }
             count();
+
+            function timeUpFormLaunch(timeUpPage)
+            {
+                var form = document.getElementById("form");
+                form.setAttribute("action", timeUpPage)
+
+                document.getElementById("save").click();
+            }
 
         </script>
     </body>
