@@ -19,10 +19,13 @@ if($timer)
     $interval = new DateInterval("PT" . $lab->getTimerVal() . "M");
 
     $current_time = DateTime::createFromFormat("Y-m-d H:i:s", date('Y-m-d H:i:s'));
+    $current_time->setTimezone(new DateTimeZone("America/Phoenix"));
 
     $timer_end = $timer->add($interval);
 
-    if($current_time->diff($timer_end) > 0)
+    echo var_dump($current_time->diff($timer_end));
+
+    if($current_time->diff($timer_end) < 0)
     {
         Redirect('../Student/time-up.php');
     }
@@ -34,6 +37,6 @@ if($timer)
 }
 else
 {
-    StartTimer($_SESSION['resource_link_id'], $_SESSION['user_id']);
+    echo StartTimer($_SESSION['resource_link_id'], $_SESSION['user_id']);
     Redirect('../Student/labview.php');
 }
