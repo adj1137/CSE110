@@ -11,12 +11,24 @@ include_once '../Model/Step.php';
 include_once '../Compile/JavaHandler.php';
 include_once '../Compile/ErrorDictionary.php';
 include_once '../Model/Database.php';
+include_once  '../Include/functions.php';
 
 
 
 $lab = new Lab($_SESSION['resource_link_id']);
 
 $steps = $lab->getSteps();
+
+$timer = Timer($_SESSION['resource_link_id'], $_SESSION['user_id'], $lab->getTimerVal());
+
+if(!$timer)
+{
+   Redirect("time-up.php");
+}
+else
+{
+
+}
 
 
 if(isset($_POST['save']))
@@ -30,6 +42,7 @@ if(isset($_POST['save']))
 
     $current_time = $date = date('Y-m-d H:i:s');
     $start_time = DateTime::createFromFormat('Y-m-d H:i:s', checkTimer($_SESSION['resource_link_id'], $_SESSION['user_id'])[0]);
+    $start_time->setTimezone(new DateTimeZone("America/Phoenix"));
 
     $interval = date_diff($start_time, $current_time);
 
@@ -61,11 +74,6 @@ if(isset($_POST['save']))
     }
 }
 else {
-    startTimer($_SESSION['resource_link_id'], $_SESSION['user_id']);
-    $current_time = DateTime::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'));
-    $start_time = DateTime::createFromFormat('Y-m-d H:i:s', checkTimer($_SESSION['resource_link_id'], $_SESSION['user_id'])[0]);
-
-    $interval = date_diff($start_time, $current_time);
     $code_window = "";
     $current_step = 0;
     $output = "";
@@ -84,7 +92,6 @@ else {
     <header>
         <title>Student View</title>
 
-        <link rel="stylesheet" type="text/css" href="../Style/css/bootstrap.css' ?>">
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" href="../Include/codemirror/lib/codemirror.css">
         <link rel=stylesheet" href="../Include/codemirror/theme/colorforth.css">
@@ -92,7 +99,7 @@ else {
         <link rel="stylesheet" href="../Include/codemirror/addon/hint/show-hint.css">
         <script src="../Include/codemirror/mode/clike/clike.js"></script>
     </header>
-    <body>
+    <body onload="">
         <div class="main">
             <form action="" method="post">
             <div class="header">
@@ -101,7 +108,8 @@ else {
                 </div>
                 <div class="info">
                     <h1><?php echo $_SESSION['resource_link_title']; ?></h1>
-                    <h1 id="timer"><?php echo $interval->format('%h:%i:%s'); ?></h1>
+                    <h2>Time Remaining</h2>
+                    <h1 id="timer"><?php echo $timer->format("%H:%I:%S") ?></h1>
                     <input type="hidden" name="current_step" value="<?php echo $current_step ?>">
                 </div>
             </div>
@@ -145,5 +153,24 @@ else {
                 javaEditor.setSize(clientWidth, clientHeight);
             }
         </script>
+        <script type="text/javascript">
+            function count() {
+
+                var startTime = document.getElementById('timer').innerHTML;
+                var pieces = startTime.split(":");
+                var time = new Date();    time.setHours(pieces[0]);
+                time.setMinutes(pieces[1]);
+                time.setSeconds(pieces[2]);
+                var timedif = new Date(time.valueOf() - 1000);
+                var newtime = timedif.toTimeString().split(" ")[0];
+                document.getElementById('timer').innerHTML=newtime;
+                setTimeout(count, 1000);
+            }
+            count();
+
+        </script>
     </body>
 </HTML>
+<script>
+
+</script>

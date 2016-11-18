@@ -21,6 +21,7 @@ class Lab
     public function Lab($resource_link_id)
     {
         $Lab = GetLab($resource_link_id);
+
         if(is_null($Lab))
         {
             $Lab = NewLab($resource_link_id);
@@ -55,8 +56,6 @@ class Lab
         }
 
         SaveLab($this->resource_link_id, $this->steps, $this->due_date, $this->open_date, $this->timer_val);
-
-        echo "<pre>" . var_dump($step) . "</pre>";
 
         return $step;
     }
