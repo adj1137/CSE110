@@ -10,12 +10,25 @@ include_once '../Include/functions.php';
 include "../Model/Database.php";
 include "../Model/Lab.php";
 
-$timer = DateTime::createFromFormat("Y-m-d H:i:s",CheckTimer($_SESSION['resource_link_id'], $_SESSION['user_id'])[0]);
-echo var_dump($timer);
-if($timer)
+//Create Lab Object to Check all times
+$lab = new Lab($_SESSION['resource_link_id']);
+//Get $due_date and $open_date DateTime objects from lab's due_date and open_date fields
+$due_date = DateTime::createFromFormat("Y-m-d H:i:s", $lab->getDueDate());
+$open_date = DateTime::createFromFormat("Y-m-d H:i:s", $lab->getOpenDate());
+//Check if current time is past due date
+if($due_date < new DateTime())
 {
-    $lab = new Lab($_SESSION['resource_link_id']);
+    Redirect('../Student/lab-past-due.php');
+}//Check if current time is before open date
+elseif($open_date > new DateTime())
+{
+    Redirect('../Student/lab-not-open.php');
+}
+//Attempt to create timer object from Timer Database Records
+$timer = DateTime::createFromFormat("Y-m-d H:i:s",CheckTimer($_SESSION['resource_link_id'], $_SESSION['user_id'])[0]);
 
+if($timer) //If the timer object was found
+{
     $interval = new DateInterval("PT" . $lab->getTimerVal() . "M");
 
     $current_time = DateTime::createFromFormat("Y-m-d H:i:s", date('Y-m-d H:i:s'));
@@ -23,19 +36,17 @@ if($timer)
 
     $timer_end = $timer->add($interval);
 
-    echo var_dump($current_time->diff($timer_end));
-
-    if($current_time->diff($timer_end) < 0)
+    $difference = $current_time->diff($timer_end);
+    if($difference->h <= 0 && $difference->m <= 0 && $difference->s <= 0) //Time is up!
     {
         Redirect('../Student/time-up.php');
     }
-    else
+    else //There is still time remaining
     {
         Redirect('../Student/labview.php');
     }
-    echo var_dump($current_time);
 }
-else
+else // Create a new time object
 {
     echo StartTimer($_SESSION['resource_link_id'], $_SESSION['user_id']);
     Redirect('../Student/labview.php');

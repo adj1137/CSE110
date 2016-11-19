@@ -110,31 +110,27 @@
 .cm-link {text-decoration: underline;}
 .cm-strikethrough {text-decoration: line-through;}
 
-.cm-s-default.CodeMirror { background: #002240; color: white; }
-.cm-s-default div.CodeMirror-selected { background: #b36539; }
-.cm-s-default .CodeMirror-line::selection, .cm-s-default .CodeMirror-line > span::selection, .cm-s-default .CodeMirror-line > span > span::selection { background: rgba(179, 101, 57, .99); }
-.cm-s-default .CodeMirror-line::-moz-selection, .cm-s-default .CodeMirror-line > span::-moz-selection, .cm-s-default .CodeMirror-line > span > span::-moz-selection { background: rgba(179, 101, 57, .99); }
-.cm-s-default .CodeMirror-gutters { background: #002240; border-right: 1px solid #aaa; }
-.cm-s-default .CodeMirror-guttermarker { color: #ffee80; }
-.cm-s-default .CodeMirror-guttermarker-subtle { color: #d0d0d0; }
-.cm-s-default .CodeMirror-linenumber { color: #d0d0d0; }
-.cm-s-default .CodeMirror-cursor { border-left: 1px solid white; }
-
-.cm-s-default span.cm-comment { color: #08f; }
-.cm-s-default span.cm-atom { color: #845dc4; }
-.cm-s-default span.cm-number, .cm-s-default span.cm-attribute { color: #ff80e1; }
-.cm-s-default span.cm-keyword { color: #ffee80; }
-.cm-s-default span.cm-string { color: #3ad900; }
-.cm-s-default span.cm-meta { color: #ff9d00; }
-.cm-s-default span.cm-variable-2, .cm-s-default span.cm-tag { color: #9effff; }
-.cm-s-default span.cm-variable-3, .cm-s-default span.cm-def { color: white; }
-.cm-s-default span.cm-bracket { color: #d8d8d8; }
-.cm-s-default span.cm-builtin, .cm-s-default span.cm-special { color: #ff9e59; }
-.cm-s-default span.cm-link { color: #845dc4; }
-.cm-s-default span.cm-error { color: #9d1e15; }
-
-.cm-s-default .CodeMirror-activeline-background { background: #002D57; }
-.cm-s-default .CodeMirror-matchingbracket { outline:1px solid grey;color:white !important; }
+.cm-s-default .cm-keyword {color: #708;}
+.cm-s-default .cm-atom {color: #219;}
+.cm-s-default .cm-number {color: #164;}
+.cm-s-default .cm-def {color: #00f;}
+.cm-s-default .cm-variable,
+.cm-s-default .cm-punctuation,
+.cm-s-default .cm-property,
+.cm-s-default .cm-operator {}
+.cm-s-default .cm-variable-2 {color: #05a;}
+.cm-s-default .cm-variable-3 {color: #085;}
+.cm-s-default .cm-comment {color: #a50;}
+.cm-s-default .cm-string {color: #a11;}
+.cm-s-default .cm-string-2 {color: #f50;}
+.cm-s-default .cm-meta {color: #555;}
+.cm-s-default .cm-qualifier {color: #555;}
+.cm-s-default .cm-builtin {color: #30a;}
+.cm-s-default .cm-bracket {color: #997;}
+.cm-s-default .cm-tag {color: #170;}
+.cm-s-default .cm-attribute {color: #00c;}
+.cm-s-default .cm-hr {color: #999;}
+.cm-s-default .cm-link {color: #00c;}
 
 .cm-s-default .cm-error {color: #f00;}
 .cm-invalidchar {color: #f00;}

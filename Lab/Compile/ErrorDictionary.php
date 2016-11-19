@@ -21,12 +21,11 @@ class ErrorDictionary
 
         $array = explode("\n", $output);
 
-        echo "<pre>";
-        echo var_dump($array);
-        echo "</pre>";
+        $upperArray = $array;
 
         for( $i = 0; $i < count($array) ; $i++)
         {
+
             $array[$i] = strtolower($array[$i]);
 
             $offset = strpos($array[$i], "error:");
@@ -34,24 +33,23 @@ class ErrorDictionary
             if($offset !== false)
             {
                 $this->errors++;
-                $final = substr($array[$i], $offset + 7, 25);
+                $final = substr($upperArray[$i], $offset + 7, 25);
 
                 $error = new JavaError($final);
 
                 if(strcmp($error->getHint(), "") == 0)
                 {
-                    $array[$i] = "<a class='tooltip' href=''><span class='tooltiptext'>Sorry, There are no Hints for this Error.</span>" . $array[$i] . "</a>";
+                    $upperArray[$i] = "<a class='tooltip' href=''><span class='tooltiptext'>Sorry, There are no Hints for this Error.</span>" . $upperArray[$i] . "</a>";
                 }
                 else
                 {
-                    $array[$i] = "<a class='tooltip' href=''><span class='tooltiptext'>". $error->getHint() ."</span>" . $array[$i] . "</a>";
+                    $upperArray[$i] = "<a class='tooltip' href=''><span class='tooltiptext'>". $error->getHint() ."</span>" . $upperArray[$i] . "</a>";
                 }
 
 
             }
 
-
-            $this->error_output = implode("<br />", $array);
+            $this->error_output = implode("<br />", $upperArray);
 
         }
 

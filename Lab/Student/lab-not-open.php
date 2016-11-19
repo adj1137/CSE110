@@ -11,8 +11,8 @@
 
 </header>
 <body>
-<h1>Time is Up!</h1>
-<h2>You are out of time.</h2>
+<h1>Lab Not Open!</h1>
+<h2>This Lab Opens Soon.</h2>
 
 <h2>If you think this is in error, be sure to tell your instructor.</h2>
 </body>

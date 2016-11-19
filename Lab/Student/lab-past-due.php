@@ -11,8 +11,8 @@
 
 </header>
 <body>
-<h1>Time is Up!</h1>
-<h2>You are out of time.</h2>
+<h1>Past Due Date!</h1>
+<h2>The Due Date for the Project has Passed.</h2>
 
 <h2>If you think this is in error, be sure to tell your instructor.</h2>
 </body>
