@@ -50,8 +50,8 @@ $steps = $lab->getSteps();
                 </tr>
                 <tr>
                     <td></td>
-                    <td><label for="alotted_time">Time Allowed:</label></td>
-                    <td><input type="number" name="alotted_time" value="<?php echo $timer ?>"></td>
+                    <td><label for="alotted_time">Time Allowed (mins):</label></td>
+                    <td><input type="number" name="alotted_time" value="<?php echo $timer ?>"> </td>
                 </tr>
                 <tr>
                     <th><!-- to be left blank as placeholder --></th>
