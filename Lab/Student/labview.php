@@ -85,6 +85,7 @@ $instruction = $step->GetInstructions();
         <title>Student View</title>
 
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
         <link rel="stylesheet" href="../Include/codemirror/lib/codemirror.css">
         <link rel=stylesheet" href="../Include/codemirror/theme/colorforth.css">
         <script src="../Include/codemirror/lib/codemirror.js"></script>
@@ -96,11 +97,10 @@ $instruction = $step->GetInstructions();
             <form id="form" action="" method="post">
             <div class="header">
                 <div class="instructions">
-                    <textarea readonly id="instructions" name="instructions" class=""><?php echo $instruction ?></textarea>
+                    <textarea readonly id="instructions" name="instructions" class="instruction-text"><?php echo $instruction ?></textarea>
                 </div>
                 <div class="info">
                     <h1><?php echo $_SESSION['resource_link_title']; ?></h1>
-                    <h2>Time Remaining</h2>
                     <h1 id="timer"><?php echo $timer->format("%H:%I:%S") ?></h1>
                     <input type="hidden" name="current_step" value="<?php echo $current_step ?>">
                 </div>
@@ -113,10 +113,30 @@ $instruction = $step->GetInstructions();
             </div>
             <div class="footer">
                 <div class="output-area">
+                    <h3>Output</h3>
+                    <hr>
                     <?php echo $output ?>
                 </div>
                 <div class="output-help">
+                    <ul class="tab">
+                        <li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'London')">London</a></li>
+                        <li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'Paris')">Paris</a></li>
+                        <li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</a></li>
+                    </ul>
+                    <div id="London" class="tabcontent">
+                        <h3>London</h3>
+                        <p>London is the capital city of England.</p>
+                    </div>
 
+                    <div id="Paris" class="tabcontent">
+                        <h3>Paris</h3>
+                        <p>Paris is the capital of France.</p>
+                    </div>
+
+                    <div id="Tokyo" class="tabcontent">
+                        <h3>Tokyo</h3>
+                        <p>Tokyo is the capital of Japan.</p>
+                    </div>
                 </div>
             </div>
             </form>
@@ -175,6 +195,26 @@ $instruction = $step->GetInstructions();
                 form.setAttribute("action", timeUpPage)
 
                 document.getElementById("save").click();
+            }
+            function openCity(evt, cityName) {
+                // Declare all variables
+                var i, tabcontent, tablinks;
+
+                // Get all elements with class="tabcontent" and hide them
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+                // Get all elements with class="tablinks" and remove the class "active"
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+
+                // Show the current tab, and add an "active" class to the link that opened the tab
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
             }
 
         </script>

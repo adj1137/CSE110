@@ -10,6 +10,7 @@ html body {
 .header {
     width: 100%;
     height: 20%;
+    font-size: 14px;
     border: black 2px solid;
 }
 .instructions {
@@ -17,13 +18,24 @@ html body {
     height: 100%;
     float: left;
     border-right: black 2px solid;
-
+}
+.instructions textarea {
+    font-size: 14px;
+    font-family: "Open Sans";
 }
 .info {
     width: 20%;
     height: 100%;
     float: left;
     background-color: #a4001d;
+}
+.info h1 {
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    width: auto;
+    text-align: center;
+    font-family: "Open Sans";
 }
 
 .coding-window {
@@ -35,10 +47,12 @@ html body {
 }
 .code_window {
     height: 100%;
+    font-family: "Open Sans";
 }
 .navigation {
     height: 10%;
     width: 100%;
+    z-index: 1;
     background-color: #a4001d;
     border-right: black 2px solid;
     border-left: black 2px solid;
@@ -55,20 +69,26 @@ html body {
     height: 100%;
     width: 49%;
     float: left;
+    font-family: "Open Sans";
+    font-size: 12px;
+    overflow-y: auto;
+    overflow-x: visible;
     border-right: black 2px solid;
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+    background-color: white;
+    background-color: -moz-field;
+}
+
+.output-area h3{
+    font-family: "Open Sans";
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 .output-help {
     height: 100%;
     width: 49%;
     float: left;
-}
-
-.instruction, .answer {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    height: 300px;
-
 }
 
 .lab-window {
@@ -130,7 +150,6 @@ textarea {
     font: -moz-field;
     margin-right: auto;
     margin-left: auto;
-    font: -webkit-small-control;
     margin-top: 5px;
     padding: 2px 3px;
     width: 100%;
@@ -154,29 +173,32 @@ textarea {
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted black;
+
 }
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 120px;
+    width: 280px;
     background-color: #555;
     color: #fff;
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
     position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
+    z-index: 1000;
+    bottom: 50%;
+    left: 25%;
     margin-left: -60px;
-    opacity: 0;
+    opacity: 100;
     transition: opacity 1s;
+    overflow: visible;
+
 }
 
 .tooltip .tooltiptext::after {
     content: "";
     position: absolute;
-    top: 100%;
+    top: 50%;
     left: 50%;
     margin-left: -5px;
     border-width: 5px;
@@ -187,4 +209,42 @@ textarea {
 .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
+}
+
+/* Style the list */
+ul.tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Float the list items side by side */
+ul.tab li {float: left;}
+
+/* Style the links inside the list items */
+ul.tab li a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 7px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of links on hover */
+ul.tab li a:hover {background-color: #ddd;}
+
+/* Create an active/current tablink class */
+ul.tab li a:focus, .active {background-color: #ccc;}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
 }
