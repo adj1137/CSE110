@@ -15,13 +15,12 @@ if(isset($_POST['save']))
 
     $Lab->save();
 
-    //TODO: Remove comment lines after testing
-    //Redirect("index.php");
+    Redirect("index.php");
 
     $input = $_FILES['inputFile'];
     $output = $_FILES['outputFile'];
 
-    
+
     //Traverse inputs and if not empty store input and corresponding output in compile folder
     $i = 0;
     while(strcmp($input['name'][$i], "") != 0){
