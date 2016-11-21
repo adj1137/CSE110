@@ -15,7 +15,7 @@ if(isset($_POST['save']))
 
     $Lab->save();
 
-    Redirect("index.php");
+
 
     $input = $_FILES['inputFile'];
     $output = $_FILES['outputFile'];
@@ -32,10 +32,11 @@ if(isset($_POST['save']))
         if (!file_exists($path_out)) {
             mkdir($path_out, 0777, true);
         }
-        move_uploaded_file($input['tmp_name'][$i], $path_in . "in". $i . ".txt");
-        move_uploaded_file($output['tmp_name'][$i], $path_out . "out". $i . ".txt");
+        echo move_uploaded_file($input['tmp_name'][$i], $path_in . "in". $i . ".txt");
+        echo move_uploaded_file($output['tmp_name'][$i], $path_out . "out". $i . ".txt");
         $i++;
     }
+    Redirect("index.php");
 }
 
 function reArrayFiles($file)
