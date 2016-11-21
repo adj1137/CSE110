@@ -33,17 +33,19 @@ class ErrorDictionary
             if($offset !== false)
             {
                 $this->errors++;
-                $final = substr($upperArray[$i], $offset + 7, 25);
+                $charmax = strlen($upperArray[$i]) - ($offset + 7);
+
+                $final = substr($upperArray[$i], $offset + 7, $charmax);
 
                 $error = new JavaError($final);
 
                 if(strcmp($error->getHint(), "") == 0)
                 {
-                    $upperArray[$i] = "<a class='tooltip' href=''><span class='tooltiptext'>Sorry, There are no Hints for this Error.</span>" . $upperArray[$i] . "</a>";
+                    $upperArray[$i] = "<a class='tooltip' data-container='body' name='tooltip'><span class='tooltiptext'>Sorry, There are no Hints for this Error.</span>" . $upperArray[$i] . "</a>";
                 }
                 else
                 {
-                    $upperArray[$i] = "<a class='tooltip' href=''><span class='tooltiptext'>". $error->getHint() ."</span>" . $upperArray[$i] . "</a>";
+                    $upperArray[$i] = "<a class='tooltip' data-container='body' name='tooltip'><span class='tooltiptext'>". $error->getHint() ."</span>" . $upperArray[$i] . "</a>";
                 }
 
 

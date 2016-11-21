@@ -15,13 +15,12 @@ class JavaError
 
     public function JavaError($error)
     {
-        $result = GetError($error);
+        $result = GetError(inputScrubbing($error));
 
         if(is_null($result))
         {
-            $result = NewError($error, "");
+           $result = NewError(inputScrubbing($error), "");
         }
-
         $this->error = $result['error'];
         $this->hint = $result['hint'];
     }
@@ -35,6 +34,11 @@ class JavaError
     {
         return $this->hint;
     }
+}
+
+function inputScrubbing($input)
+{
+    return str_replace("'", "''", $input);
 }
 
 function AllErrors()

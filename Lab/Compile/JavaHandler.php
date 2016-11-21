@@ -68,10 +68,6 @@ class JavaHandler
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
         }
-        else
-        {
-            echo "File Already Exists.";
-        }
 
         $myfile = fopen( $path . "/$this->filename.java", "w+") or die("Unable to open file!");
         fwrite($myfile, $this->input);
