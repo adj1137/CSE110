@@ -125,29 +125,6 @@ $steps = $lab->getSteps();
             $n = $n + 1;
         }
     }
-    if(isset($_FILES['inputFile'])){
-        //Example: script to grab for first file of input files array; can be used for outputFile array
-        //
-        //$file_name = $_FILES['inputFile']['name'][0];
-        //$file_size =$_FILES['inputFile']['size'][0];
-        //$file_type=$_FILES['inputFile']['type'][0];
-        //$file_ext=strtolower(end(explode('.',$_FILES['inputFile']['name'][0])));
-
-        $errors= array();
-        $extensions= array("txt");
-
-        if(in_array($file_ext,$extensions)=== false){
-            $errors[]="extension not allowed, please choose a .txt file.";
-        }
-
-        if(empty($errors)==true){
-            //This is where we can upload to database
-            //move_uploaded_file($file_tmp,"files/".$file_name);
-            echo "Success";
-        }else{
-            print_r($errors);
-        }
-    }
 
     ?>
     <div class="step-window add-step">
