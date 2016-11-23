@@ -47,17 +47,19 @@ if(isset($_POST['save']))
     $error = new ErrorDictionary($output);
 
     $output = $error->GetErrorOutput();
+    echo $lab->getNumberSteps();
 
     if(!$error->isError())
     {
-        if($current_step < $lab->getNumberSteps())
+        echo $current_step;
+        if($current_step + 1 < $lab->getNumberSteps())
         {
             $current_step++;
         }
-        elseif($current_step == $lab->getNumberSteps())
+        elseif($current_step + 1 == $lab->getNumberSteps())
         {
-            header( 'Location: exit.php' ) ;
-            exit();
+            echo "That's the money";
+            $java->RunAllInputs();
         }
         else
         {
@@ -121,7 +123,26 @@ $instruction = $step->GetInstructions();
                             Test Cases
                         </div>
                         <div class="output-help">
+                            <ul class="tab">
+                                <li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'London')">London</a></li>
+                                <li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'Paris')">Paris</a></li>
+                                <li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</a></li>
+                            </ul>
 
+                            <div id="London" class="tabcontent">
+                                <h3>London</h3>
+                                <p>London is the capital city of England.</p>
+                            </div>
+
+                            <div id="Paris" class="tabcontent">
+                                <h3>Paris</h3>
+                                <p>Paris is the capital of France.</p>
+                            </div>
+
+                            <div id="Tokyo" class="tabcontent">
+                                <h3>Tokyo</h3>
+                                <p>Tokyo is the capital of Japan.</p>
+                            </div>
                         </div>
                         <div class="heading">
                             Output
@@ -146,7 +167,7 @@ $instruction = $step->GetInstructions();
                         for($i = 0; $i < $numSteps; $i++)
                         {
                             $s = $i + 1;
-                            if($i < $current_step)
+                            if($i <= $current_step)
                             {
                                 echo "<div class='progress complete' style='width: $width%;'><b>$s</b></div>";
                             }
@@ -214,6 +235,27 @@ $instruction = $step->GetInstructions();
 
                 document.getElementById("save").click();
             }
+            function openCity(evt, cityName) {
+                // Declare all variables
+                var i, tabcontent, tablinks;
+
+                // Get all elements with class="tabcontent" and hide them
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+                // Get all elements with class="tablinks" and remove the class "active"
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+
+                // Show the current tab, and add an "active" class to the link that opened the tab
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+
             function openCity(evt, cityName) {
                 // Declare all variables
                 var i, tabcontent, tablinks;

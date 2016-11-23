@@ -22,17 +22,22 @@ if(isset($_POST['save']))
 
     $instruction = $_POST['instructions'];
 
-    echo $step->SetInstructions($instruction);
-    echo var_dump($step);
+    $step->SetInstructions($instruction);
 
     $step->Save();
 
-    //Redirect("index.php");
+
+    Redirect("index.php");
 }
 else
 {
+    echo "In HERE!!!!";
     $instruction = $step->GetInstructions();
 }
+
+echo "<pre>";
+var_dump($step);
+echo "</pre>";
 
 ?>
 <HTML>

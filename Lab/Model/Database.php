@@ -142,7 +142,12 @@ function GetStep($id)
 
 function SaveStep($instruction, $correct_answer, $expected_output, $id, $step_mask)
 {
+
+
     $connection = ConnectDB();
+
+    $instruction =  $connection->real_escape_string($instruction);
+
     $sql = "UPDATE steps SET instruction='$instruction', correct_answer='$correct_answer', expected_output='$expected_output', step_mask='$step_mask' WHERE id=$id";
 
     if ($connection->query($sql) == TRUE) {

@@ -17,12 +17,14 @@ $code = "import java.util.*;
         }";
 $java = new JavaHandler($code);
 
-$java->setResourceLinkID("142");
+$java->setResourceLinkID("120988f929-274612");
 $java->setUserID("123456");
 
 $java->Compile();
 
-$java->Run("input1.txt");
+$java->RunAllInputs();
 
-echo $java->GetOutput();
+echo $java->GetStudentGrade();
+
+//cho $java->GetOutput();
 

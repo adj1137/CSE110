@@ -42,6 +42,7 @@ class Step
             $this->expected_output = $result['expected_output'];
             $this->step_id = $result['id'];
             $this->step_mask = $result['step_mask'];
+            $this->resource_link_id = $result['resource_link_id'];
         }
         return $this;
     }

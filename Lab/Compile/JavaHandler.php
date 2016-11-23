@@ -16,6 +16,9 @@ class JavaHandler
     private $resource_link_id;
     private $user_id;
 
+    private $test_case;
+    private $student_grade;
+
     public function JavaHandler($input)
     {
         $this->input = $input;
@@ -82,7 +85,7 @@ class JavaHandler
         if($this->output == Array())
         {
             $this->CompileSuccess = TRUE;
-            $this->output[0] = "Program Compiled Successfully.";
+            //$this->output[0] = "Program Compiled Successfully.";
         }
         else
         {
@@ -90,8 +93,56 @@ class JavaHandler
         }
 
     }
+    public function RunAllInputs()
+    {
+
+        $this->student_grade = 0;
+        $in_path = $_SERVER['DOCUMENT_ROOT'] ."/CSE110/Lab/Compile/"  . $this->resource_link_id . "/input/";
+
+        $inputs = array_values(array_diff(scandir($in_path), array('.', '..')));
+
+        $out_path = $_SERVER['DOCUMENT_ROOT'] ."/CSE110/Lab/Compile/"  . $this->resource_link_id . "/output/";
+
+        $outputs = array_values(array_diff(scandir($out_path), array('.', '..')));
+
+
+
+        $results = Array();
+
+        for($i = 0; $i < count($inputs); $i++)
+        {
+            $this->Run($in_path . $inputs[$i]);
+
+            $expected_out  = explode("\n", file_get_contents( $out_path . $outputs[$i]));
+            //echo "<pre>";
+            //var_dump($expected_out);
+            //var_dump($this->output);
+            //echo "</pre>";
+
+
+
+            if(empty(array_diff($this->output, $expected_out)))
+            {
+                $this->student_grade += 1;
+                $results[$i]['test'] = $i + 1;
+                $results[$i]['value'] = true;
+            }
+            else
+            {
+                $results[$i]['test'] = $i + 1;
+                $results[$i]['value'] = false;
+            }
+
+        }
+        $this->test_case = $results;
+        $this->student_grade = $this->student_grade / count($inputs);
+
+    }
+
+
     public function Run($input_file)
     {
+        $this->output = Array();
 
         if($this->CompileSuccess)
         {
@@ -112,5 +163,15 @@ class JavaHandler
     public function GetInput()
     {
         return $this->input;
+    }
+
+    public function GetStudentGrade()
+    {
+        return $this->student_grade;
+    }
+
+    public function GetTestCaseResults()
+    {
+        return $this->test_case;
     }
 }

@@ -16,7 +16,7 @@ session_start();
 <h1>Welcome <?php echo $_SESSION['lis_person_name_given'] ?>!</h1>
 <h2></h2>
     <form method="get" action="timer.php">
-        <button type="submit" onclick="timer.php" value="Begin Lab">Begin Lab</button>
+        <button type="submit"  value="Begin Lab">Begin Lab</button>
     </form>
 </body>
 </HTML>
