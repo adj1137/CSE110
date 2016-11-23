@@ -10,6 +10,7 @@ session_start();
 <HTML>
 <header>
     <title>Student Lab Portal</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </header>
 <body>
 <h1><?php echo $_SESSION['resource_link_title']; ?></h1>
