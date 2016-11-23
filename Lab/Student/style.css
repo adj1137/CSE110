@@ -1,37 +1,65 @@
 html body {
+    width: 97%;
+    height: 97%;
+    padding: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-color: #a4001d;
+}
+.heading {
+    margin-bottom: 1%;
+    float: left;
+    color: white;
+    font-family: "Open Sans";
     width: 100%;
-    height: 100%;
+    height: 3%;
 }
 .main {
     width: 100%;
     height: 100%;
-    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    border: #a4001d 2px solid;
 }
-.header {
+.content {
     width: 100%;
-    height: 20%;
-    font-size: 14px;
-    border: black 2px solid;
+    height: 95%;
+
+}
+.left-col {
+    float: left;
+    width: 55%;
+    height: 100%;
+}
+.right-col {
+    float: left;
+    width: 44%;
+    height: 100%;
+    margin-left: 1%;
 }
 .instructions {
-    width: 79%;
-    height: 100%;
+    width: 100%;
+    height: 41%;
     float: left;
-    border-right: black 2px solid;
 }
 .instructions textarea {
-    font-size: 14px;
+    font-size: 12px;
     font-family: "Open Sans";
 }
 .info {
-    width: 20%;
-    height: 100%;
+    width: 100%;
+    height: 10%;
     float: left;
     background-color: #a4001d;
 }
 .info h1 {
+    padding-left: 30px;
+    float: left;
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 5%;
+    margin-bottom:0;
     color: white;
     width: auto;
     text-align: center;
@@ -39,97 +67,32 @@ html body {
 }
 
 .coding-window {
-    height: 40%;
+    height: 50%;
     width: 100%;
-    border-left: black 2px solid;
-    border-right: black 2px solid;
-    border-bottom: black 2px solid;
+    float: left;
 }
 .code_window {
     height: 100%;
     font-family: "Open Sans";
 }
 .navigation {
-    height: 10%;
+    height: 5%;
     width: 100%;
-    z-index: 1;
     background-color: #a4001d;
-    border-right: black 2px solid;
-    border-left: black 2px solid;
-    border-bottom: black 2px solid;
 }
-.footer {
-    height: 28%;
-    width: 100%;
-    border-right: black 2px solid;
-    border-left: black 2px solid;
-    border-bottom: black 2px solid;
-}
-.output-area {
-    height: 100%;
-    width: 49%;
-    float: left;
-    font-family: "Open Sans";
-    font-size: 12px;
-    overflow-y: auto;
-    overflow-x: visible;
-    border-right: black 2px solid;
-    -moz-appearance: textfield;
-    -webkit-appearance: textfield;
-    background-color: white;
-    background-color: -moz-field;
+.step-tracker {
+
 }
 
-.output-area h3{
-    font-family: "Open Sans";
-    margin-top: 3px;
-    margin-bottom: 3px;
-}
-.output-help {
-    height: 100%;
-    width: 49%;
-    float: left;
-}
-
-.lab-window {
-    padding-top: 0px;
-    width: auto;
-    height: auto;
-    padding-bottom: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border: #666666 4px solid;
-    background-color: #DEDEDE;
-}
-
-.lab-window-header {
-    background-color: #990033;
-    width: 100%;
+.nav-button {
+    text-align: left;
     color: white;
-    position: relative;
-    top: 0;
-}
-
-
-.step-window {
-    width: 90%;
-    height: auto;
-    min-height: 50px;
-    margin-right: auto;
-    margin-left: auto;
-    border: #666666 4px solid;
-    margin-bottom: 10px;
-}
-.delete {
-    font-size: 40px;
-    float: right;
-    position: relative;
-    right: 0;
-    top: -40px;
-}
-
-.add-step {
-    text-align: center;
+    font-weight: bolder;
+    width: 30%;
+    font-family: "Open Sans";
+    font-size: 20px;
+    border: none;
+    background: none;
 }
 
 textarea {
@@ -138,22 +101,32 @@ textarea {
     margin-right: auto;
     margin-left: auto;
     min-height: 100px;
-    height: 100%;
+    height: 95%;
 }
 .output {
+    float:left;
     -moz-appearance: textfield;
     -webkit-appearance: textfield;
     background-color: white;
     background-color: -moz-field;
-    border: 1px solid darkgray;
-    box-shadow: 1px 1px 1px 0 lightgray inset;
     font: -moz-field;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 5px;
-    padding: 2px 3px;
     width: 100%;
+    height: 95%;
+}
+
+.output-help {
+    width: 100%;
+    height: 31%;
+    float: left;
+    background: white;
+}
+.output-area {
+    width: 100%;
+    height: 53%;
     min-height: 100px;
+    float: left;
 }
 
 #instructions {
@@ -178,12 +151,11 @@ textarea {
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 280px;
+    width: 200px;
     background-color: #555;
     color: #fff;
     text-align: center;
     border-radius: 6px;
-    padding: 5px 0;
     position: absolute;
     z-index: 1000;
     bottom: 50%;
@@ -191,7 +163,7 @@ textarea {
     margin-left: -60px;
     opacity: 100;
     transition: opacity 1s;
-    overflow: visible;
+    overflow: wrap;
 
 }
 
@@ -211,40 +183,135 @@ textarea {
     opacity: 1;
 }
 
-/* Style the list */
-ul.tab {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
+.container {
+    width: 40%;
+    float: left;
 }
-
-/* Float the list items side by side */
-ul.tab li {float: left;}
-
-/* Style the links inside the list items */
-ul.tab li a {
-    display: inline-block;
-    color: black;
+.label {
+    width: 100%;
+    height: 60%;
+    color: white;
     text-align: center;
-    padding: 7px;
-    text-decoration: none;
-    transition: 0.3s;
-    font-size: 17px;
 }
 
-/* Change background color of links on hover */
-ul.tab li a:hover {background-color: #ddd;}
+.item {
+    background-color: white;
+    border-radius: 3px;
+    margin: auto;
+    float: left;
+    display: block;
+    height: 40%;
+    text-align: center;
+    font-size: 10px;
+    color: #a4001d;
+    vertical-align: middle;
+    margin-right: 3%;
+    font-family: "Open Sans";
+}
 
-/* Create an active/current tablink class */
-ul.tab li a:focus, .active {background-color: #ccc;}
+.filled {
+    background-color: #a4001d !important;
+}
 
-/* Style the tab content */
-.tabcontent {
-    display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
+.wrap {
+    float: left;
+    width: 100%;
+    height: 30px;
+    z-index:1;white-space: nowrap;
+    overflow:hidden;
+}
+.wrap div:first-child{margin-left:-2%;}
+.progress {
+    float:left;
+    margin:0;
+    margin-left:0.5%;
+    height: 30px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    color: white;
+    line-height: 30px;
+    transition: all 0.8s;
+}
+.progress:before,
+.progress:after {
+    content: "";
+    position: absolute;
+    transition: all 0.8s;
+    z-index:2;
+}
+.progress:before {
+    height: 50%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.2);
+    -webkit-transform: skew(45deg);
+    -moz-transform: skew(45deg);
+    transform: skew(45deg);
+}
+.progress:after {
+    height: 50%;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    background: rgba(0, 0, 0, 0.2);
+    -webkit-transform: skew(-45deg);
+    -moz-transform: skew(-45deg);
+    transform: skew(-45deg);
+}
+.progress:hover:before,
+.progress:hover:after {
+}
+
+.progress.complete:before,
+.progress.complete:after{
+    background: rgba(255, 179, 16, 0.3);
+}
+
+button {
+    background: none;
+    border: none;
+}
+.previous {
+    width: 15%;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+.previous:before {
+    background: rgba(255, 179, 16, 0.3);
+    -webkit-transform: skew(-45deg);
+    -moz-transform: skew(-45deg);
+    transform: skew(-45deg);
+    top: 0%;
+}
+.previous:after {
+    background: rgba(255, 179, 16, 0.3);
+    height: 50%;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    -webkit-transform: skew(45deg);
+    -moz-transform: skew(45deg);
+    transform: skew(45deg);
+}
+
+.compile:before {
+    background: rgba(255, 179, 16, 0.3);
+    -webkit-transform: skew(45deg);
+    -moz-transform: skew(45deg);
+    transform: skew(45deg);
+    top: 0%;
+}
+.compile:after {
+    background: rgba(255, 179, 16, 0.3);
+    height: 50%;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    -webkit-transform: skew(-45deg);
+    -moz-transform: skew(-45deg);
+    transform: skew(-45deg);
+
 }

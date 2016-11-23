@@ -37,20 +37,24 @@ class JavaHandler
         $clean = preg_replace('/\s+/S', " ", $this->input);
 
         $input = explode(" ", $clean);
-        $i = 0;
-        while($i < count($input))
+        if(count($input) > 3)
         {
-            if(strcmp($input[$i], "public") == 0)
+            $i = 0;
+            while($i < count($input))
             {
-                $i++;
-                if(strcmp($input[$i], "class") == 0)
+                if(strcmp($input[$i], "public") == 0)
                 {
                     $i++;
-                    return $input[$i];
+                    if(strcmp($input[$i], "class") == 0)
+                    {
+                        $i++;
+                        return $input[$i];
+                    }
                 }
+                $i++;
             }
-            $i++;
         }
+
     }
 
 

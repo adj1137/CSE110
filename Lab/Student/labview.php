@@ -95,53 +95,70 @@ $instruction = $step->GetInstructions();
     <body onload="">
         <div class="main">
             <form id="form" action="" method="post">
-            <div class="header">
-                <div class="instructions">
-                    <textarea readonly id="instructions" name="instructions" class="instruction-text"><?php echo $instruction ?></textarea>
-                </div>
-                <div class="info">
-                    <h1><?php echo $_SESSION['resource_link_title']; ?></h1>
-                    <h1 id="timer"><?php echo $timer->format("%H:%I:%S") ?></h1>
-                    <input type="hidden" name="current_step" value="<?php echo $current_step ?>">
-                </div>
-            </div>
-            <div class="coding-window" id="coding-window" onresize="resizeWindow()">
-                <textarea name="code_window" id="code_window" class=""><?php echo $code_window ?></textarea>
-            </div>
-            <div class="navigation">
-                <input type="submit" value="Continue" id="save" name="save" />
-            </div>
-            <div class="footer">
-                <div class="output-area">
-                    <h3>Output</h3>
-                    <hr>
-                    <?php echo $output ?>
-                </div>
-                <div class="output-help">
-                    <ul class="tab">
-                        <li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'London')">London</a></li>
-                        <li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'Paris')">Paris</a></li>
-                        <li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</a></li>
-                    </ul>
-                    <div id="London" class="tabcontent">
-                        <h3>London</h3>
-                        <p>London is the capital city of England.</p>
-                    </div>
+                <div class="content">
+                    <div class="left-col">
+                        <div class="heading">
+                            Instructions
+                        </div>
+                        <div class="instructions">
 
-                    <div id="Paris" class="tabcontent">
-                        <h3>Paris</h3>
-                        <p>Paris is the capital of France.</p>
+                            <textarea readonly id="instructions" name="instructions" class="instruction-text"><?php echo $instruction ?></textarea>
+                        </div>
+                        <div class="heading">
+                            Code Window
+                        </div>
+                        <div class="coding-window" id="coding-window" onresize="resizeWindow()">
+                            <textarea name="code_window" id="code_window" class=""><?php echo $code_window ?></textarea>
+                        </div>
                     </div>
+                    <div class="right-col">
+                        <div class="info">
+                            <h1><?php echo $_SESSION['resource_link_title']; ?></h1>
+                            <h1 id="timer"><?php echo $timer->format("%H:%I:%S") ?></h1>
+                            <input type="hidden" name="current_step" value="<?php echo $current_step ?>">
+                        </div>
+                        <div class="heading">
+                            Test Cases
+                        </div>
+                        <div class="output-help">
 
-                    <div id="Tokyo" class="tabcontent">
-                        <h3>Tokyo</h3>
-                        <p>Tokyo is the capital of Japan.</p>
+                        </div>
+                        <div class="heading">
+                            Output
+                        </div>
+                        <div class="output-area">
+
+                            <div class="output">
+                                <?php echo $output ?>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            </form>
-        </div>
+                <div class="navigation">
+                    <div class="wrap">
+                        <button type="submit" id="prev" name="prev" class='progress previous'>Previous</button>
+                        <?php
+                        $numSteps = $lab->getNumberSteps();
 
+                        $width = floor(53 / $numSteps);
+
+                        for($i = 0; $i < $numSteps; $i++)
+                        {
+                            $s = $i + 1;
+                            if($i < $current_step)
+                            {
+                                echo "<div class='progress complete' style='width: $width%;'><b>$s</b></div>";
+                            }
+                            else
+                            {
+                                echo " <div class='progress' style='width: $width%;'><b>$s</b></div>";
+                            }
+                        }
+                        ?>
+                        <button type="submit" id="save" name="save" class='progress compile' style='width:25%;'>Compile & Continue</button>
+                    </div>
+                </div>
             </form>
 
         </div>
@@ -150,7 +167,8 @@ $instruction = $step->GetInstructions();
                 lineNumbers: true,
                 matchBrackets: true,
                 mode: "text/x-java",
-                theme: "default"
+                theme: "default",
+                lineWrapping: true
             });
             var clientHeight = document.getElementById('coding-window').clientHeight;
             var clientWidth = document.getElementById('coding-window').clientWidth;

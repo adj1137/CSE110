@@ -101,9 +101,9 @@ function NewStep($resource_link_id, $step_mask)
     if(empty($result)) {
         $query = "CREATE TABLE steps (
                           id int(32) AUTO_INCREMENT,
-                          instruction varchar(512) NOT NULL,
-                          correct_answer varchar(1024) NOT NULL,
-                          expected_output varchar(512) NOT NULL,
+                          instruction varchar(2048) NOT NULL,
+                          correct_answer varchar(32) NOT NULL,
+                          expected_output varchar(32) NOT NULL,
                           resource_link_id varchar(32) NOT NULL,
                           step_mask int(8) NOT NULL,
                           PRIMARY KEY  (id)
