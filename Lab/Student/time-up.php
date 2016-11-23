@@ -8,7 +8,7 @@
 ?>
 <HTML>
 <header>
-
+    <link rel="stylesheet" type="text/css" href="style.css">
 </header>
 <body>
 <h1>Time is Up!</h1>
