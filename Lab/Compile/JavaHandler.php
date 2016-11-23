@@ -22,7 +22,7 @@ class JavaHandler
     public function JavaHandler($input)
     {
         $this->input = $input;
-
+        $this->test_case = false;
     }
 
     public function setUserID($user_id)
@@ -126,11 +126,13 @@ class JavaHandler
                 $this->student_grade += 1;
                 $results[$i]['test'] = $i + 1;
                 $results[$i]['value'] = true;
+                $results[$i]['path'] = $in_path . $inputs[$i];
             }
             else
             {
                 $results[$i]['test'] = $i + 1;
                 $results[$i]['value'] = false;
+                $results[$i]['path'] = $out_path . $outputs[$i];
             }
 
         }
@@ -153,6 +155,27 @@ class JavaHandler
             $this->output[count($this->output)] = "Java Run Error: File Did Not Compile Successfully. Please Compile and then Try To Run Again.";
         }
 
+    }
+
+    public function GetTestCaseDetails()
+    {
+        $in_path = $_SERVER['DOCUMENT_ROOT'] ."/CSE110/Lab/Compile/"  . $this->resource_link_id . "/input/";
+
+        $inputs = array_values(array_diff(scandir($in_path), array('.', '..')));
+
+        $out_path = $_SERVER['DOCUMENT_ROOT'] ."/CSE110/Lab/Compile/"  . $this->resource_link_id . "/output/";
+
+        $outputs = array_values(array_diff(scandir($out_path), array('.', '..')));
+
+        $result = Array();
+
+        for($i = 0; $i < count($inputs); $i++)
+        {
+            $result[$i]['name'] = "Test Case " . $i;
+            $result[$i]['in'] = "../Compile/$this->resource_link_id/input/". $inputs[$i];
+            $result[$i]['out'] = "../Compile/$this->resource_link_id/output/". $outputs[$i];
+        }
+        return $result;
     }
 
     public function GetOutput()

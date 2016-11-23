@@ -32,7 +32,7 @@ else
 
 }
 
-
+$java;
 if(isset($_POST['save']))
 {
     $java = new JavaHandler($_POST['code_window']);
@@ -47,35 +47,44 @@ if(isset($_POST['save']))
     $error = new ErrorDictionary($output);
 
     $output = $error->GetErrorOutput();
-    echo $lab->getNumberSteps();
 
-    if(!$error->isError())
+    if(!$error->isError() && strcmp($code_window, "") != 0)
     {
-        echo $current_step;
+        $output = "Program Compiled Successfully.";
         if($current_step + 1 < $lab->getNumberSteps())
         {
             $current_step++;
         }
         elseif($current_step + 1 == $lab->getNumberSteps())
         {
-            echo "That's the money";
             $java->RunAllInputs();
-        }
-        else
-        {
-            echo "<h1>There was an error.</h1>";
+
+            $_SESSION['grade'] = $java->GetStudentGrade();
+
+            if($_SESSION['grade'] == 1)
+            {
+
+                Redirect("finish.php");
+            }
         }
     }
 }
+
 else {
     $code_window = "";
     $current_step = 0;
     $output = "";
+    $java = new JavaHandler("");
 }
 $step = $steps[$current_step];
 
+
 $instruction = $step->GetInstructions();
 
+if(strcmp($output, "") == 0)
+{
+    $output = "No Output To Display.";
+}
 
 
 
@@ -100,17 +109,11 @@ $instruction = $step->GetInstructions();
                 <div class="content">
                     <div class="left-col">
                         <div class="heading">
-                            Instructions
+                            Step <?php echo ($current_step + 1) ?> Instructions
                         </div>
                         <div class="instructions">
 
                             <textarea readonly id="instructions" name="instructions" class="instruction-text"><?php echo $instruction ?></textarea>
-                        </div>
-                        <div class="heading">
-                            Code Window
-                        </div>
-                        <div class="coding-window" id="coding-window" onresize="resizeWindow()">
-                            <textarea name="code_window" id="code_window" class=""><?php echo $code_window ?></textarea>
                         </div>
                     </div>
                     <div class="right-col">
@@ -119,50 +122,69 @@ $instruction = $step->GetInstructions();
                             <h1 id="timer"><?php echo $timer->format("%H:%I:%S") ?></h1>
                             <input type="hidden" name="current_step" value="<?php echo $current_step ?>">
                         </div>
-                        <div class="heading">
-                            Test Cases
-                        </div>
                         <div class="output-help">
                             <ul class="tab">
-                                <li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'London')">London</a></li>
-                                <li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'Paris')">Paris</a></li>
-                                <li><a href="javascript:void(0)" class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</a></li>
+                                <li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'output')">Output</a></li>
+                                <li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'test-cases')">Test Cases</a></li>
                             </ul>
-
-                            <div id="London" class="tabcontent">
-                                <h3>London</h3>
-                                <p>London is the capital city of England.</p>
+                            <div id="output" class="tabcontent">
+                                <div class="output">
+                                    <?php echo $output ?>
+                                </div>
                             </div>
 
-                            <div id="Paris" class="tabcontent">
-                                <h3>Paris</h3>
-                                <p>Paris is the capital of France.</p>
-                            </div>
+                            <div id="test-cases" class="tabcontent">
+                                <div class="testcase">
+                                <?php
+                                $test_cases = $java->GetTestCaseResults();
+                                if($test_cases)
+                                {
+                                    foreach($test_cases as $case)
+                                    {
+                                        $selected;
+                                        if($case['value'])
+                                        {
+                                            $selected = "checked";
+                                        }
+                                        else
+                                        {
+                                            $selected = "";
+                                        }
+                                        if($test_cases)
+                                        {
+                                            echo "<p>Test " . ($case['test'] + 1) . "</p> <input disabled type='checkbox' ". $selected . "/>";
+                                        }
+                                        else
+                                        {
+                                            echo "<p>" . $case['test'] . " : ". $case['value'] . "</p>";
+                                        }
 
-                            <div id="Tokyo" class="tabcontent">
-                                <h3>Tokyo</h3>
-                                <p>Tokyo is the capital of Japan.</p>
+                                    }
+                                }
+                                else
+                                {
+                                    $test_cases = $java->GetTestCaseDetails();
+                                    var_dump($test_cases);
+                                }
+                                ?>
+                                </div>
                             </div>
                         </div>
-                        <div class="heading">
-                            Output
-                        </div>
-                        <div class="output-area">
-
-                            <div class="output">
-                                <?php echo $output ?>
-                            </div>
-
-                        </div>
+                    </div>
+                    <div class="heading">
+                        Code Window
+                    </div>
+                    <div class="coding-window" id="coding-window" onresize="resizeWindow()">
+                        <textarea name="code_window" id="code_window" class=""><?php echo $code_window ?></textarea>
                     </div>
                 </div>
                 <div class="navigation">
                     <div class="wrap">
-                        <button type="submit" id="prev" name="prev" class='progress previous'>Previous</button>
+                        <!--<button type="submit" id="prev" name="prev" class='progress previous'>Previous</button>-->
                         <?php
                         $numSteps = $lab->getNumberSteps();
 
-                        $width = floor(53 / $numSteps);
+                        $width = floor(68 / $numSteps);
 
                         for($i = 0; $i < $numSteps; $i++)
                         {
@@ -235,7 +257,7 @@ $instruction = $step->GetInstructions();
 
                 document.getElementById("save").click();
             }
-            function openCity(evt, cityName) {
+            function openTab(evt, tabName) {
                 // Declare all variables
                 var i, tabcontent, tablinks;
 
@@ -252,33 +274,15 @@ $instruction = $step->GetInstructions();
                 }
 
                 // Show the current tab, and add an "active" class to the link that opened the tab
-                document.getElementById(cityName).style.display = "block";
+                document.getElementById(tabName).style.display = "block";
                 evt.currentTarget.className += " active";
             }
 
-            function openCity(evt, cityName) {
-                // Declare all variables
-                var i, tabcontent, tablinks;
-
-                // Get all elements with class="tabcontent" and hide them
-                tabcontent = document.getElementsByClassName("tabcontent");
-                for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
-                }
-
-                // Get all elements with class="tablinks" and remove the class "active"
-                tablinks = document.getElementsByClassName("tablinks");
-                for (i = 0; i < tablinks.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                }
-
-                // Show the current tab, and add an "active" class to the link that opened the tab
-                document.getElementById(cityName).style.display = "block";
-                evt.currentTarget.className += " active";
-            }
+            document.getElementById("output").style.display = "block";
 
         </script>
     </body>
+
 </HTML>
 <script>
 

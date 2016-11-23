@@ -12,7 +12,7 @@ html body {
     color: white;
     font-family: "Open Sans";
     width: 100%;
-    height: 3%;
+    height: 5%;
 }
 .main {
     width: 100%;
@@ -23,23 +23,23 @@ html body {
 }
 .content {
     width: 100%;
-    height: 95%;
+    height: 45%;
 
 }
 .left-col {
     float: left;
-    width: 55%;
+    width: 45%;
     height: 100%;
 }
 .right-col {
     float: left;
-    width: 44%;
+    width: 54%;
     height: 100%;
     margin-left: 1%;
 }
 .instructions {
     width: 100%;
-    height: 41%;
+    height: 93%;
     float: left;
 }
 .instructions textarea {
@@ -48,7 +48,7 @@ html body {
 }
 .info {
     width: 100%;
-    height: 10%;
+    height: 19%;
     float: left;
     background-color: #a4001d;
 }
@@ -67,7 +67,7 @@ html body {
 }
 
 .coding-window {
-    height: 50%;
+    height: 100%;
     width: 100%;
     float: left;
 }
@@ -76,9 +76,11 @@ html body {
     font-family: "Open Sans";
 }
 .navigation {
+    margin-top: 2%;
     height: 5%;
     width: 100%;
     background-color: #a4001d;
+    float: left;
 }
 .step-tracker {
 
@@ -118,9 +120,11 @@ textarea {
 
 .output-help {
     width: 100%;
-    height: 31%;
+    height: 80%;
     float: left;
     background: white;
+    overflow-y: hidden;
+
 }
 .output-area {
     width: 100%;
@@ -163,7 +167,6 @@ textarea {
     margin-left: -60px;
     opacity: 100;
     transition: opacity 1s;
-    overflow: wrap;
 
 }
 
@@ -220,7 +223,7 @@ textarea {
     z-index:1;white-space: nowrap;
     overflow:hidden;
 }
-.wrap div:first-child{margin-left:-2%;}
+.wrap div:first-child{margin-left:2%;}
 .progress {
     float:left;
     margin:0;
@@ -292,7 +295,7 @@ button {
     -webkit-transform: skew(-45deg);
     -moz-transform: skew(-45deg);
     transform: skew(-45deg);
-    top: 0%;
+    top: 0;
 }
 .previous:after {
     background: rgba(255, 179, 16, 0.3);
@@ -305,12 +308,15 @@ button {
     transform: skew(45deg);
 }
 
+.previous:hover:before, .previous:hover:after, .compile:hover:before, .compile:hover:after {
+    background-color: rgba(255, 179, 16, 0.5);
+}
 .compile:before {
     background: rgba(255, 179, 16, 0.3);
     -webkit-transform: skew(45deg);
     -moz-transform: skew(45deg);
     transform: skew(45deg);
-    top: 0%;
+    top: 0;
 }
 .compile:after {
     background: rgba(255, 179, 16, 0.3);
@@ -324,40 +330,55 @@ button {
 
 }
 
+
 /* Style the list */
 ul.tab {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    background-color:  #a4001d;
+    height: 15%;
 }
 
 /* Float the list items side by side */
-ul.tab li {float: left;}
+ul.tab li {float: left;
+    width: 50%;}
 
 /* Style the links inside the list items */
 ul.tab li a {
+    display: flex;
+    align-items: center;
     display: inline-block;
-    color: black;
+    color: white;
     text-align: center;
-    padding: 14px 16px;
+    padding-top: 5%;
+    width: 100%;
+    height: 100%;
     text-decoration: none;
     transition: 0.3s;
     font-size: 17px;
+
+    background-color: rgba(255, 179, 16, 0.3);
 }
 
 /* Change background color of links on hover */
-ul.tab li a:hover {background-color: #ddd;}
+ul.tab li a:hover {background-color: rgba(255, 179, 16, 0.5);}
 
 /* Create an active/current tablink class */
-ul.tab li a:focus, .active {background-color: #ccc;}
+ul.tab li a:focus, .active {background-color: rgba(255, 179, 16, 0.5);}
 
 /* Style the tab content */
 .tabcontent {
     display: none;
+    height: 80%;
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.tabs {
+    height: 5%;
 }
