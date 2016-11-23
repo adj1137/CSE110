@@ -21,7 +21,13 @@ $steps = $lab->getSteps();
 
 $timer = Timer($_SESSION['resource_link_id'], $_SESSION['user_id'], $lab->getTimerVal());
 
+$submit = false;
+
 $action = "";
+
+$result = false;
+
+$continue_value = "Compile & Continue";
 
 if(!$timer)
 {
@@ -32,7 +38,7 @@ else
 
 }
 
-$java;
+
 if(isset($_POST['save']))
 {
     $java = new JavaHandler($_POST['code_window']);
@@ -58,24 +64,42 @@ if(isset($_POST['save']))
         elseif($current_step + 1 == $lab->getNumberSteps())
         {
             $java->RunAllInputs();
-
             $_SESSION['grade'] = $java->GetStudentGrade();
+            $submit = true;
 
-            if($_SESSION['grade'] == 1)
-            {
+            $output = $java->GetFullOutput();
 
-                Redirect("finish.php");
-            }
+            $result = $java->GetTestCaseResults();
+
         }
     }
+}
+
+elseif(isset($_POST['submit']))
+{
+    $java = new JavaHandler($_POST['code_window']);
+    $java->setResourceLinkID($_SESSION['resource_link_id']);
+    $java->setUserID($_SESSION['user_id']);
+    //$java->RunAllInputs();
+    $current_step = $_POST['current_step'];
+    $code_window = $_POST['code_window'];
+    //$_SESSION['grade'] = $java->GetStudentGrade();
+    $output = "";
+
+    Redirect("finish.php");
 }
 
 else {
     $code_window = "";
     $current_step = 0;
     $output = "";
-    $java = new JavaHandler("");
 }
+if($current_step + 1 == $lab->getNumberSteps())
+{
+
+    $continue_value = "Run";
+}
+
 $step = $steps[$current_step];
 
 
@@ -136,36 +160,37 @@ if(strcmp($output, "") == 0)
                             <div id="test-cases" class="tabcontent">
                                 <div class="testcase">
                                 <?php
-                                $test_cases = $java->GetTestCaseResults();
-                                if($test_cases)
-                                {
-                                    foreach($test_cases as $case)
+
+                                    $test_cases = GetTestCaseDetails($_SESSION['resource_link_id']);
+                                    echo "<table>";
+                                    echo "<tr><th>Case</th><th>In</th><th>Expected Output</th><th>Result</th></tr>";
+                                    for($i = 0; $i < count($test_cases); $i++)
                                     {
-                                        $selected;
-                                        if($case['value'])
+                                        echo "<tr>";
+                                        echo "<th>" . $test_cases[$i]['name'] . "</th>";
+                                        echo "<td><a target='_blank' href='" . $test_cases[$i]['in'] . "'>Input</a></td>";
+                                        echo "<td><a target='_blank' href='" .$test_cases[$i]['out'] . "'>Output</a></td>";
+                                        if($result)
                                         {
-                                            $selected = "checked";
+                                            if($result[$i])
+                                            {
+                                                echo "<td>Passed</td>";
+                                            }
+                                            else
+                                            {
+                                                echo "<td>Failed</td>";
+                                            }
+
                                         }
                                         else
                                         {
-                                            $selected = "";
-                                        }
-                                        if($test_cases)
-                                        {
-                                            echo "<p>Test " . ($case['test'] + 1) . "</p> <input disabled type='checkbox' ". $selected . "/>";
-                                        }
-                                        else
-                                        {
-                                            echo "<p>" . $case['test'] . " : ". $case['value'] . "</p>";
+                                            echo "<td>Not Tested</td>";
                                         }
 
+                                        echo "</tr>";
                                     }
-                                }
-                                else
-                                {
-                                    $test_cases = $java->GetTestCaseDetails();
-                                    var_dump($test_cases);
-                                }
+                                    echo "</table>";
+
                                 ?>
                                 </div>
                             </div>
@@ -184,22 +209,34 @@ if(strcmp($output, "") == 0)
                         <?php
                         $numSteps = $lab->getNumberSteps();
 
-                        $width = floor(68 / $numSteps);
+                        $width = floor(65 / $numSteps);
 
                         for($i = 0; $i < $numSteps; $i++)
                         {
                             $s = $i + 1;
                             if($i <= $current_step)
                             {
-                                echo "<div class='progress complete' style='width: $width%;'><b>$s</b></div>";
+                                echo "<div class='progress complete' style='width: $width%;'><p>$s</p></div>";
                             }
                             else
                             {
-                                echo " <div class='progress' style='width: $width%;'><b>$s</b></div>";
+                                echo " <div class='progress' style='width: $width%;'><p>$s</p></div>";
                             }
                         }
+
+                        if($submit)
+                        {
+                            echo "<button type=\"submit\" id=\"save\" name=\"save\" class='progress compile' style='width:15%;'>Run</button>";
+                            echo "<button type=\"submit\" id=\"submit\" name=\"submit\" class='progress submit' style='width:10%;'>Submit</button>";
+                        }
+                        else
+                        {
+                            echo "<button type=\"submit\" id=\"save\" name=\"save\" class='progress compile' style='width:25%;'>" . $continue_value ."</button>";
+                        }
+
+
+
                         ?>
-                        <button type="submit" id="save" name="save" class='progress compile' style='width:25%;'>Compile & Continue</button>
                     </div>
                 </div>
             </form>

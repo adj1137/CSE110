@@ -31,13 +31,8 @@ if(isset($_POST['save']))
 }
 else
 {
-    echo "In HERE!!!!";
     $instruction = $step->GetInstructions();
 }
-
-echo "<pre>";
-var_dump($step);
-echo "</pre>";
 
 ?>
 <HTML>

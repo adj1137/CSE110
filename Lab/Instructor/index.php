@@ -27,9 +27,6 @@ $steps = $lab->getSteps();
     <link rel="stylesheet" type="text/css" href="style.css" >
 </header>
 <body>
-<h1><?php echo $_SESSION['context_label'] . ": " . $_SESSION['context_title'] . " Lab System" ?></h1>
-<h2>Welcome <?php echo $_SESSION['lis_person_name_given'];  ?>!</h2>
-<hr />
 <div class="lab-window">
     <div class="lab-window-header">
         <h1 class="lab-title"><?php echo $_SESSION['resource_link_title']; ?> </h1>

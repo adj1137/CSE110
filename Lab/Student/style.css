@@ -43,8 +43,12 @@ html body {
     float: left;
 }
 .instructions textarea {
-    font-size: 12px;
+    font-size: 14px;
     font-family: "Open Sans";
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 .info {
     width: 100%;
@@ -53,7 +57,7 @@ html body {
     background-color: #a4001d;
 }
 .info h1 {
-    padding-left: 30px;
+    padding-left: 15%;
     float: left;
     text-align: center;
     margin-left: auto;
@@ -116,6 +120,8 @@ textarea {
     margin-left: auto;
     width: 100%;
     height: 95%;
+    font-family: "Open Sans";
+    font-size: 14px;
 }
 
 .output-help {
@@ -144,6 +150,10 @@ textarea {
     font-size: 40px;
 }
 
+h1, h2 {
+    color:white;
+}
+
 /* Tool Tip Stuff */
 
 .tooltip {
@@ -162,7 +172,7 @@ textarea {
     border-radius: 6px;
     position: absolute;
     z-index: 1000;
-    bottom: 50%;
+    bottom: -25%;
     left: 25%;
     margin-left: -60px;
     opacity: 100;
@@ -235,7 +245,16 @@ textarea {
     color: white;
     line-height: 30px;
     transition: all 0.8s;
+    font-family: "Open Sans";
 }
+
+.progress p {
+    position: relative;
+    top: -30%;
+    text-align: center;
+
+}
+
 .progress:before,
 .progress:after {
     content: "";
@@ -275,6 +294,7 @@ textarea {
 button {
     background: none;
     border: none;
+    font-family: "Open Sans";
 }
 .current {
     color: #a4001d;
@@ -288,6 +308,7 @@ button {
     width: 15%;
     margin-right: 2%;
     margin-left: 2%;
+
 }
 
 .previous:before {
@@ -355,6 +376,7 @@ ul.tab li a {
     padding-top: 5%;
     width: 100%;
     height: 100%;
+    font-family: "Open Sans";
     text-decoration: none;
     transition: 0.3s;
     font-size: 17px;
@@ -381,4 +403,18 @@ ul.tab li a:focus, .active {background-color: rgba(255, 179, 16, 0.5);}
 
 .tabs {
     height: 5%;
+}
+
+table {
+    width: 100%;
+}
+
+tr {
+    width: 100%;
+}
+
+td, th {
+    width: 25%;
+    text-align: center;
+    font-family: "Open Sans";
 }

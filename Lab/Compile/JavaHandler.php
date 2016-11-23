@@ -19,6 +19,8 @@ class JavaHandler
     private $test_case;
     private $student_grade;
 
+    private $full_output;
+
     public function JavaHandler($input)
     {
         $this->input = $input;
@@ -111,6 +113,7 @@ class JavaHandler
 
         for($i = 0; $i < count($inputs); $i++)
         {
+            $this->full_output .= "<br>###Begin Test Case $i###<br>";
             $this->Run($in_path . $inputs[$i]);
 
             $expected_out  = explode("\n", file_get_contents( $out_path . $outputs[$i]));
@@ -124,15 +127,13 @@ class JavaHandler
             if(empty(array_diff($this->output, $expected_out)))
             {
                 $this->student_grade += 1;
-                $results[$i]['test'] = $i + 1;
-                $results[$i]['value'] = true;
-                $results[$i]['path'] = $in_path . $inputs[$i];
+                $results[$i] = true;
+
             }
             else
             {
-                $results[$i]['test'] = $i + 1;
-                $results[$i]['value'] = false;
-                $results[$i]['path'] = $out_path . $outputs[$i];
+                $results[$i] = false;
+
             }
 
         }
@@ -154,28 +155,8 @@ class JavaHandler
         {
             $this->output[count($this->output)] = "Java Run Error: File Did Not Compile Successfully. Please Compile and then Try To Run Again.";
         }
+        $this->full_output .= implode($this->output);
 
-    }
-
-    public function GetTestCaseDetails()
-    {
-        $in_path = $_SERVER['DOCUMENT_ROOT'] ."/CSE110/Lab/Compile/"  . $this->resource_link_id . "/input/";
-
-        $inputs = array_values(array_diff(scandir($in_path), array('.', '..')));
-
-        $out_path = $_SERVER['DOCUMENT_ROOT'] ."/CSE110/Lab/Compile/"  . $this->resource_link_id . "/output/";
-
-        $outputs = array_values(array_diff(scandir($out_path), array('.', '..')));
-
-        $result = Array();
-
-        for($i = 0; $i < count($inputs); $i++)
-        {
-            $result[$i]['name'] = "Test Case " . $i;
-            $result[$i]['in'] = "../Compile/$this->resource_link_id/input/". $inputs[$i];
-            $result[$i]['out'] = "../Compile/$this->resource_link_id/output/". $outputs[$i];
-        }
-        return $result;
     }
 
     public function GetOutput()
@@ -196,5 +177,10 @@ class JavaHandler
     public function GetTestCaseResults()
     {
         return $this->test_case;
+    }
+
+    public function GetFullOutput()
+    {
+        return $this->full_output;
     }
 }

@@ -18,6 +18,27 @@ function Redirect($url, $permanent = false)
     exit();
 }
 
+function GetTestCaseDetails($resource_link_id)
+{
+    $in_path = $_SERVER['DOCUMENT_ROOT'] ."/CSE110/Lab/Compile/"  . $resource_link_id. "/input/";
+
+    $inputs = array_values(array_diff(scandir($in_path), array('.', '..')));
+
+    $out_path = $_SERVER['DOCUMENT_ROOT'] ."/CSE110/Lab/Compile/"  . $resource_link_id . "/output/";
+
+    $outputs = array_values(array_diff(scandir($out_path), array('.', '..')));
+
+    $result = Array();
+
+    for($i = 0; $i < count($inputs); $i++)
+    {
+        $result[$i]['name'] = "Test Case " . $i;
+        $result[$i]['in'] = "../Compile/$resource_link_id/input/". $inputs[$i];
+        $result[$i]['out'] = "../Compile/$resource_link_id/output/". $outputs[$i];
+    }
+    return $result;
+}
+
 function Timer($resource_link_id, $user_id, $timer_interval)
 {
     include_once "../Model/Database.php";
@@ -41,3 +62,4 @@ function Timer($resource_link_id, $user_id, $timer_interval)
         return $timer;
     }
 }
+

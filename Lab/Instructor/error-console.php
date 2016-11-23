@@ -11,8 +11,6 @@ include_once '../Model/JavaError.php';
 
 $errors = GetAllErrors();
 
-var_dump($errors);
-
 //TODO: Implement AJAX to Create "Delete" Buttons on Client Side for Steps
 
 ?>
@@ -22,9 +20,6 @@ var_dump($errors);
     <link rel="stylesheet" type="text/css" href="style.css" >
 </header>
 <body>
-<h1><?php echo $_SESSION['context_label'] . ": " . $_SESSION['context_title'] . " Lab System" ?></h1>
-<h2>Welcome <?php echo $_SESSION['lis_person_name_given'];  ?>!</h2>
-<hr />
 <div class="lab-window">
     <div class="lab-window-header">
         <h1 class="lab-title">Error Console</h1>
