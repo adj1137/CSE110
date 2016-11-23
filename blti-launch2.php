@@ -8,8 +8,8 @@ $secret = "secret";
 $launch_data = array(
     "user_id" => "292832126",
     "roles" => "Instructor",
-    "resource_link_id" => "120988f929-274612",
-    "resource_link_title" => "Lab 1",
+    "resource_link_id" => "750988f929-284612",
+    "resource_link_title" => "Lab 2",
     "resource_link_description" => "A weekly blog.",
     "lis_person_name_full" => "Allen D. James",
     "lis_person_name_family" => "James",
@@ -57,7 +57,7 @@ $signature = base64_encode(hash_hmac("sha1", $base_string, $secret, true));
         <input type="hidden" name="<?php echo $k ?>" value="<?php echo $v ?>">
     <?php } ?>
     <input type="hidden" name="oauth_signature" value="<?php echo $signature ?>">
-    <button  id="submit" type="submit">Launch</button>
+    <button id="submit" type="submit">Launch</button>
 </form>
 <script type="text/javascript">
     function submit()
