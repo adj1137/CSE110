@@ -142,8 +142,8 @@ if(strcmp($output, "") == 0)
                     </div>
                     <div class="right-col">
                         <div class="info">
-                            <h1><?php echo $_SESSION['resource_link_title']; ?></h1>
-                            <h1 id="timer"><?php echo $timer->format("%H:%I:%S") ?></h1>
+                            <h2><?php echo $_SESSION['resource_link_title']; ?></h2>
+                            <h2 id="timer"><?php echo $timer->format("%H:%I:%S") ?></h2>
                             <input type="hidden" name="current_step" value="<?php echo $current_step ?>">
                         </div>
                         <div class="output-help">
@@ -227,7 +227,7 @@ if(strcmp($output, "") == 0)
                         if($submit)
                         {
                             echo "<button type=\"submit\" id=\"save\" name=\"save\" class='progress compile' style='width:15%;'>Run</button>";
-                            echo "<button type=\"submit\" id=\"submit\" name=\"submit\" class='progress submit' style='width:10%;'>Submit</button>";
+                            echo "<button type=\"submit\" id=\"submit\" name=\"submit\" class='progress compile' style='width:10%;'>Submit</button>";
                         }
                         else
                         {

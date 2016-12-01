@@ -56,13 +56,13 @@ html body {
     float: left;
     background-color: #a4001d;
 }
-.info h1 {
+.info h2 {
     padding-left: 15%;
     float: left;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;
+    margin-top: 2%;
     margin-bottom:0;
     color: white;
     width: auto;
@@ -80,8 +80,8 @@ html body {
     font-family: "Open Sans";
 }
 .navigation {
-    margin-top: 2%;
-    height: 5%;
+    margin-top: 1%;
+    height: 4%;
     width: 100%;
     background-color: #a4001d;
     float: left;
@@ -247,11 +247,13 @@ h1, h2 {
     transition: all 0.8s;
     font-family: "Open Sans";
 }
-
+button p,
 .progress p {
     position: relative;
-    top: -30%;
+    top: -20%;
     text-align: center;
+    font-size: 14px;
+    margin: 0px;
 
 }
 

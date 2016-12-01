@@ -10,13 +10,15 @@ session_start();
 <HTML>
 <header>
     <title>Student Lab Portal</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
 </header>
 <body>
 <h1><?php echo $_SESSION['resource_link_title']; ?></h1>
 <h1>Welcome <?php echo $_SESSION['lis_person_name_given'] ?>!</h1>
 <h2></h2>
     <form method="get" action="timer.php">
-        <input type="submit"  value="Begin Lab">Begin Lab</input>
+        <input type="submit"  value="Begin Lab"></input>
     </form>
 </body>
 </HTML>

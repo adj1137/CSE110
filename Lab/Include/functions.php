@@ -48,7 +48,6 @@ function Timer($resource_link_id, $user_id, $timer_interval)
 
     $current_time = DateTime::createFromFormat("Y-m-d H:i:s", date('Y-m-d H:i:s'));
     $current_time->setTimezone(new DateTimeZone("America/Phoenix"));
-
     $timer_end = $timer->add($interval);
 
     $timer = $current_time->diff($timer_end);
